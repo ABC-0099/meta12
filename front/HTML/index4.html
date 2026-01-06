@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+            border: 1px, solid #ccc;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding:10px 20px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <p>순서있는 리스트</p>
+    <ol>
+        <li>항목 1</li>
+        <li>항목 2</li>
+        <li>항목 3</li>
+    </ol>
+    <p>순서없는 리스트</p>
+    <ul>
+        <li>항목 1</li>
+        <li>항목 2</li>
+        <li>항목 3</li>
+    </ul>
+    <h2>상품 구성</h2>
+    <table>
+        <caption>선물용과 가정용 상품 구성</caption>
+        <thead>
+            <tr>
+                 <th>용도</th>
+                 <th>중량</th>
+                 <th>개수</th>
+                 <th>가격</th>
+             </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td rowspan="2">선물용</td>
+            <td>3kg</td>
+            <td>11~16과</td>
+            <td>35,000</td>
+        </tr>
+        <tr>
+            
+            <td>5kg</td>
+            <td>18~26과</td>
+            <td>52,000</td>
+        </tr>
+        <tr>
+            <td rowspan="2">가정용</td>
+            <td>3kg</td>
+            <td>11~16과</td>
+            <td>30,000</td>
+        </tr>
+        <tr>
+            <td>5kg</td>
+            <td>18~26과</td>
+            <td>47,000</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
