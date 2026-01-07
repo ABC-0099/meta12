@@ -20,7 +20,18 @@
         #id200.a1 {
             background-color: blueviolet;
         }
-    </style>
+        .tenp {
+            /* 가장 우선순위가 높은 !important 사용법 */
+            /* 충돌의 해결할 수 있는 최후의 수단 */
+            color: black !important;
+        }
+        input[type="text"]{
+            border: 2px solid blue;
+        }
+        [data-custom="mystyle1"]{
+            background-color: orange;
+        }
+        </style>
     <title>Document</title>
 </head>
 <body>
@@ -32,6 +43,12 @@
     <p id="id200" class="a1">id가 200 입니다</p>
     <article class="a1">나는 아티클 클래스 a1 입니다</article>
     <p class="text" style="border: 2px dotted red;">인라인 스타일입니다</p>
+    <form>
+        <p><input type="text"></p>
+        <p><input type="password"></p>
+        <P data-custom="mystyle1">내가 만든 속성을 사용가능</P>
+        <P data-custom="mystyle2">대신 data-*** 형태 권장</P>
+    </form>
 </body>
 </html>
 
@@ -39,8 +56,10 @@
 
 <!-- block은 내가 가질수 있는 가로 최대를 가짐 
      inline은 컨텐츠 만큼-->
+
  <!-- class 단축은 .
-         id 단축은 # -->
+      id 단축은 # -->
+
 <!-- css 선택자의 우선순위 서열
 
 !important      (최상위)
