@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 요소 선택자 */
+        div{
+            background-color: dodgerblue;
+        }
+        /* 클래스 선택자 */
+        .a1{
+            background-color: khaki;
+        }
+        /* 아이디 선택자 */
+        #id100{
+            background-color: pink;
+        }
+        /* 아이디가 id200 이고 클래스가 a1인 요소(두개를 모두가진) */
+        #id200.a1 {
+            background-color: blueviolet;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div>DIV 요소 입니다</div>
+    <p>P 요소 입니다</p>
+    <p class="a1">클래스가 a1 입니다</p>
+    <p class="a2">클래스가 a2 입니다</p>
+    <p id="id100">id가 100 입니다</p>
+    <p id="id200" class="a1">id가 200 입니다</p>
+    <article class="a1">나는 아티클 클래스 a1 입니다</article>
+    <p class="text" style="border: 2px dotted red;">인라인 스타일입니다</p>
+</body>
+</html>
+
+
+
+<!-- block은 내가 가질수 있는 가로 최대를 가짐 
+     inline은 컨텐츠 만큼-->
+ <!-- class 단축은 .
+         id 단축은 # -->
+<!-- css 선택자의 우선순위 서열
+
+!important      (최상위)
+인라인스타일   (style="")
+class 선택자     (.class)
+요소 선택자      (div.p)
+전체 선택자      (*)
+
+ -->
