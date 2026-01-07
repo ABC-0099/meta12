@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
+    <!-- 핵심 포인트 
+     여기에 사용되는 문법은 서버로의 폼 전송을 목적으로 함
+     <form>와 함께 시용되는 <input>의 타입을 이해해야 함.
+     최종적으로 유저의 정보를 서버로 전달하는 동작은 <input type="submit">으로 완성됨.
+     -->
     <h3>폼 태그 예제</h3>
         <form action="">
             <div>
@@ -17,7 +22,9 @@
                 <input type="password" id="user-password" name="password">
             </div>
             <div>
-                <input type="submit" value="로그인">
+                <!-- 아래 두 코드는 동일한 기능 수행 -->
+                <!-- <input type="submit" value="로그인"> -->
+                 <button>로그인</button>
             </div>
         </form>
         <form action="">
@@ -46,7 +53,32 @@
                 <input type="reset" value="취소하기">
             </div>
         </form>
-        <input type="date" name="date">
+        <div><input type="date" name="date"></div>
+        <!-- 아래 버튼 모양은 submit이 아니므로 전송기능이 없음.그냥 버튼 -->
+        <div><input type="button" value="나는 버튼"></div>
+
+        <!-- button태그는 기본적으로 submit을 포함하고 있음 -->
+        <div><button>나도 버튼</button></div>
+
+        <input type="file">
+
+        <!-- 사용자는 보이지 않지만 입력한 정보를 서버로 보낼때 함께 전송-->
+        <input type="hidden" name="상품id" value="12345">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        <input type="text" placeholder="여기에는 주소를 적어주세요" name="address">
+
+        <!-- textarea는 입력받아야할 정보의 양이 많을 때 사용 -->
+        <textarea name="memo" cols="40" rows="4"></textarea>
+
+        <!-- select & option 드롭다운 목적 -->
+         <div>
+            <label for="prod1">상품선택</label>
+            <select id="prod1" name="prod1">
+                <option value="special_3">선물용 3kg</option>
+                <option value="special_5">선물용 5kg</option>
+                <option value="family_3">가정용 3kg</option>
+                <option value="family_5">가정용 5kg</option>
+            </select>
+        </div>
 </body>
 </html>
 
