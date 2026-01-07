@@ -1,0 +1,15 @@
+    /* 자손 선택자 */
+    div p {
+        color: blue;
+    }
+    /* 자식 선택자 */
+    div > p {
+        background-color: lightblue;
+    }
+    /* 인접 형제 선택자 */
+    h1 + p {
+        font-weight:bold
+    }
+    h1 ~ p {
+        border-left: 4px solid gray;
+    }
