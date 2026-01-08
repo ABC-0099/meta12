@@ -1,16 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container{
+            /* 자식이 relative, absolute, fixed, siycky 인 경우 기준점을 제공하기 위해
+            반드시 부모는 relative여야함 (static이면 안됨)  */
+            position: relative;
+            width: 400px;
+            border: 3px solid black;
+            padding: 10px;
+            margin: 20px;
+            background-color: #f0f0f0;
+
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+
+            /* 내부 요소(글자, 이미지 또는 자식 태그)를 가운데 정렬하는 방법 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+        .box1{
+            background-color: #e74c3c;
+        }
+        .box2{
+            background-color: #3498db;
+            /* position: relative; */
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            opacity: 0.8;
+        }
+        .box3{
+            background-color: #2ecc71;
+        }
+    </style>
     <title>Document</title>
 </head>
 <body>
     <h3>position 속성 예제 - relative 와 absolute</h3>
     <div class="container">
-        <duv class="box box1">1</duv>
-        <duv class="box box2">2 (Target)</duv>
-        <duv class="box bpx3">3</duv>
+        <div class="box box1">1</div>
+        <div class="box box2">2 (Target)</div>
+        <div class="box box3">3</div>
     </div>
 </body>
 </html>
+
+
+<!--/* 
+내부 요소(글자, 이미지 또는 자식 태그)를 가운데 정렬하는 방법 */
+display: flex;
+justify-content: center;
+align-items: center;
+
+공식느낌s
+
+position: absolute;은 부모기준으로 움직임 (절대적
+relative 기준점이 고정되있고 몸만 움직임
+absolute 공중에 떠서 기준점이 부모
+
+외울것
+absolute 기준점은 relative 속성의 박스를 찾음
+
+    -->
