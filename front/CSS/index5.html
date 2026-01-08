@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin: 0;
+            padding: 20px;
+            height: 2000px;
+        }
+        .box{
+            width: 300px;
+            padding: 20px;
+            border: 2px solid black;
+            color: white;
+            font-weight: bold;
+        }
+        .static{
+            background-color: #95a5a6;
+            position: static;
+            left: 500px; /* static 속성이므로 위치이동 불가*/
+        }
+        .sticky{
+            background-color: #e67e22;
+            position: sticky;
+            top: 10px;
+            z-index: 10;
+            opacity: 0.9;
+        }
+        .fixed{
+            background-color: #8e44ad;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 150px;
+            border-radius: 15px;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+        }
+        
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <h1>position 속성 예제 - Static, fixed, sticky</h1>
+    <div class="box static">Static(기본)</div>
+    <div class="box sticky">Sticky(특정위치고정)</div>
+    <div class="content">스크롤을 이용하여 화면을 내려주세요</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="box fixed">fixed(포스트잇)</div>
+</body>
+</html>
+<!-- 
+css 2장
+기본
+display: inline, block, inline-block, flex, grid, none, table, table-cell, list-item
+position: static, relative, absolute, fixed, sticky
+z-index: [정수], auto 
+-->
+
+<!-- 
+Flexbox: 가로로 정렬(1차원)
+줄바꿈 x 그래서 축소가 일어
+
+Grid: 행, 열 (2차원)
+
+
+shrink 기본적으로 축소
+
+grow       "        확장
+-->
+
+
+
+
+
+
+
+
+<!--⣾⣿⣿⣷⣄
+⠀⠀⠀⢸⣿⣿⣿⣿⣿⣧⣴⣶⣶⣶⣄
+⠀⠀⠀⣀⣿⣿⡿⠻⣿⣿⣿⣿⣿⣿⣿⡄
+⠀⠀⠀⢇⠠⣏⡖⠒⣿⣿⣿⣿⣿⣿⣿⣧⡀
+⠀⠀⢀⣷⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷
+⠀⠀⢸⣿⣿⡿⢋⠁⠀⠀⠀⠀⠉⡙⢿⣿⣿⡇
+⠀⠀⠘⣿⣿⠀⣿⠇⠀⢀⠀⠀⠘⣿⠀⣿⡿⠁
+⠀⠀⠀⠈⠙⠷⠤⣀⣀⣐⣂⣀⣠⠤⠾⠋⠁ -->

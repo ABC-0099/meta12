@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container{
+            display: flex;
+        }
+        .sidebar{
+            background-color: #f0f0f0;
+            flex: 0 0 200px;
+            /* 확장X, 축소X, 사이즈 200 */
+        }
+        .main{
+            background-color: lightblue;
+            flex: 1;
+            /* flex: 1 1 0 을 의미함 */
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Flexbox 기본 예제</h3>
+    <div class="container">
+        <div class="sidebar">사이드바</div>
+        <div class="main">메인컨텐츠</div>
+        <div class="sidebar">사이드바</div>
+    </div>
+</body>
+</html>
+
+
+<!-- 
+flex: grow shrinh basis
+ex) flex: 0 1 auto 확장x, 축소o, 컨텐츠사이즈
+    flex: 1 0 0 확장O, 축소X, 컨텐트사이즈 무시
+    flex: 1     확장O, 축소기본값(1), 컨텐츠사이즈 무시
+-->
