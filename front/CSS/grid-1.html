@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .account-book{
+            display: grid;
+            /* 4개의 컬럼(열)을 동일한 비율(1fr)로 생성 */
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 600px;
+            /* 축소 가능, 최대값이 600 */
+            border-top: 1px solid gray;
+            border-left: 1px solid gray;
+
+        }
+        .cell{
+            border-right: 1px solid gray;
+            border-bottom: 1px solid gray;
+            padding: 10px;
+            font-size: 14px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header{
+            background-color: #00aaff;
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid black;
+        }
+        .number{
+            /* 오른쪽 정렬: grid는 주축이 항상 가로방향으로 고정. justify는 가로 정령 */
+            justify-content: end;
+        }
+        .footer{
+            background-color: #ffe082;
+            font-weight: bold;
+            
+        }
+    </style>
+
+    <title>Document</title>
+
+</head>
+
+<body>
+    <h2>나의 가계부</h2>
+
+    <div class="account-book">
+
+    <div class="cell header">날짜</div>
+    <div class="cell header">항목</div>
+    <div class="cell header">수입</div>
+    <div class="cell header">지출</div>
+
+    <div class="cell">12월 01일</div>
+    <div class="cell">월급</div>
+    <div class="cell number">3,000,000</div>
+    <div class="cell number"></div>
+
+    <div class="cell">12월 03일</div>
+    <div class="cell">식비</div>
+    <div class="cell number"></div>
+    <div class="cell number">50,000</div>
+
+    <div class="cell">12월 05일</div>
+    <div class="cell">교통비</div>
+    <div class="cell number"></div>
+    <div class="cell number">30,000</div>
+
+    <div class="cell">12월 10일</div>
+    <div class="cell">부수입</div>
+    <div class="cell number">200,000</div>
+    <div class="cell number"></div>
+
+    <div class="cell">12월 15일</div>
+    <div class="cell">통신비</div>
+    <div class="cell number"></div>
+    <div class="cell number">80,000</div>
+
+    <div class="cell footer"></div>
+    <div class="cell footer"></div>
+    <div class="cell footer number">3,2000,000</div>
+    <div class="cell footer number">160,000</div>
+
+    <div class="cell footer merge-2">잔액</div>
+    <div class="cell footer merge-2 number">3,040,000</div>
+
+    </div>
+</body>
+</html>
