@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>Flexbox 대시보드 레이아웃</title>
+    <title>Flexbox 대시보드 레이아웃2번</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       * {
@@ -14,48 +14,69 @@
       body {
         height: 100vh;
         font-family: Arial, sans-serif;
-        display: flex;
       }
 
       /* 전체 대시보드 */
       .dashboard {
+        display: flex;
+        height: 100%; /* 부모가 100vh(화면 높이 전체)를 차지하므로 그 공간을 100% 사용하겠다*/
       }
 
       /* 왼쪽 네비게이션 */
       .nav {
-
+        background-color: #1e272e;
+        color: white;
+        flex: 0 0 220px;
+        padding: 20px;
       }
 
       /* 오른쪽 전체 영역 */
       .right {
-        background-color: rgb(27, 27, 37);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
 
       /* 상단바 */
       .topbar {
         background-color: gray;
-        display: flex;
-
+        height: 60px;
+        padding: 20px;
       }
 
       /* 콘텐츠 영역 */
       .content {
+        display: flex;
+        background-color: skyblue;
+        flex: 1;
+        gap: 10px;
+        padding: 10px;
       }
 
       /* 메인 콘텐츠 */
       .main-content {
         background-color: white;
+        flex: 3;
+        padding: 20px;
       }
 
       /* 서브 패널 */
       .side-panel {
         background-color: orange;
+        flex: 1;
+        padding: 20px;
       }
 
       /* 하단 정보바 */
       .status {
-        background-color: gray;
-      }
+        background-color: rgb(88, 88, 88);
+        height: 40px;
+        color: white;
+        /*아래 3줄 가운데 배치 공식*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
     </style>
   </head>
   <body>

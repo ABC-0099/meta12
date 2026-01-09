@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flexbox 레이아웃 예제</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      /* 전체 페이지 */
+      .page {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      /* 헤더 */
+      .header {
+       background-color: rgb(12, 12, 59);
+       color: white; 
+       width: 100vw;
+       padding: 20px;
+       text-align: center;
+      }
+
+      /* 메인 영역 (사이드 + 콘텐츠) */
+      .main {
+        background-color: rgb(224, 245, 253);
+        display: flex;
+        flex: 1;
+        gap: 15px;
+        }
+
+      /* 사이드 메뉴 */
+      .sidebar {
+        background-color: rgb(21, 21, 94);
+        color: white;
+        width: 30%;
+        padding: 20px;
+      }
+
+      /* 콘텐츠 영역 */
+      .content {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(223, 252, 255);
+        flex: 1;
+        gap: 15px;
+      }
+
+      /* 본문 */
+      .article {
+        padding: 20px;
+        flex: 2;
+        background-color: white ;
+      }
+
+      /* 이벤트 광고 */
+      .event {
+        background-color: orange;
+        padding: 20px;
+        flex: 1;
+
+      }
+
+      /* 로그인 창 */
+      .login {
+        background-color: aquamarine;
+        padding: 20px;
+        flex: 1;
+      }
+
+      /* 푸터 */
+      .footer {
+        background-color: rgb(12, 12, 59);
+        color: white;
+        padding: 20px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">헤더 (로고 / 상단메뉴)</header>
+
+      <div class="main">
+        <nav class="sidebar">사이드 메뉴</nav>
+
+        <section class="content">
+          <article class="article">본문 콘텐츠</article>
+
+          <div class="event">이벤트 광고</div>
+
+          <aside class="login">로그인 창</aside>
+        </section>
+      </div>
+
+      <footer class="footer">푸터</footer>
+    </div>
+  </body>
+</html>
