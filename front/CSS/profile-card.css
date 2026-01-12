@@ -1,0 +1,81 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #f0f2f5;
+    padding-top: 50px;
+}
+
+.card-container{
+    width: 320px;
+    background-color: white;
+    margin: 0 auto;
+    /* auto - 좌우마진을 부모의 크기 내에서 최대로 가질 수 있도록 함, 자연스럽게 정렬 */
+    border-radius: 16px;
+    box-shadow: 0 4px rgba(0, 0, 0, 1);
+    padding-bottom: 30px;    /* 내용이 카드의 가장 아래에 붙으면 보기 안좋기 때문에 padding bottom */
+    overflow: hidden;/*카드 내용물이 카드 영역을 벗어나면 보이지 않게 함 */
+    text-align: center;
+}
+.profile-box{
+    background-color: skyblue;
+    padding: 40px 0;
+    
+}   
+.profile-img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+.info-box{
+    padding: 20px;
+}
+.name{
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+.job{
+    font-size: 14px;
+    font-weight: bold;
+    color: #4a90e2;
+    margin-bottom: 16px;    
+}
+.bio{
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}.skills-box{
+    margin-bottom: 25px;
+}
+.tag{
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin: 0 4px;
+}
+.btn-contact{
+    display: inline-block;
+    text-decoration: none; /*링크 밑줄 제거*/
+    background-color: #333;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    /* 애니메이션 슬로우 효과
+    즉시 변하지 않고 주어진 시간동안 서서히 변화하도록 설정 */
+}
+.btn-contact:hover {
+    background-color: #111;
+}
