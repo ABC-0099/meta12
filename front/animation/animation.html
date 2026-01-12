@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      margin: 20px 100px;
+      background-color: dodgerblue;
+    }
+
+    .color {
+      animation-name: color;
+      animation-duration: 4s;
+      animation-play-state: running;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes color {
+      from {
+        background-color: dodgerblue;
+      }
+
+      to {
+        background-color: yellow;
+      }
+    }
+
+    .move {
+      position: relative;
+      animation-name: move;
+      animation-duration: 4s;
+      animation-play-state: paused;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes move {
+      0% {
+        background-color: red;
+        left: 0px;
+        top: 0px;
+      }
+
+      25% {
+        background-color: yellow;
+        left: 200px;
+        top: 0px;
+      }
+
+      50% {
+        background-color: blue;
+        left: 200px;
+        top: 200px;
+      }
+
+      75% {
+        background-color: green;
+        left: 0px;
+        top: 200px;
+      }
+
+      100% {
+        background-color: dodgerblue;
+        left: 0px;
+        top: 0px;
+      }
+    }
+
+    .timing {
+      position: relative;
+      animation-name: race;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-play-state: paused;
+      /* animation-direction: alternate; */
+    }
+
+    .t1 {
+      animation-timing-function: linear;
+    }
+
+    .t2 {
+      animation-timing-function: ease;
+    }
+
+    .t3 {
+      animation-timing-function: ease-in;
+    }
+
+    .t4 {
+      animation-timing-function: ease-out;
+    }
+
+    .t5 {
+      animation-timing-function: ease-in-out;
+    }
+
+    .btn {
+      background-color: #ddd;
+      height: 50px;
+    }
+
+    .btn:hover .timing {
+      animation-play-state: running;
+    }
+
+    @keyframes race {
+      from {
+        left: 0px;
+      }
+
+      to {
+        left: 500px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="color"></div>
+  <div class="move"></div>
+  <div class="btn">
+    마우스 올리면 출발
+    <div class="timing t1">linear</div>
+    <div class="timing t2">Ease</div>
+    <div class="timing t3">Ease-in</div>
+    <div class="timing t4">Ease-out</div>
+    <div class="timing t5">Ease-in-out</div>
+  </div>
+</body>
+
+</html>
