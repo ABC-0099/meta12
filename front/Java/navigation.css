@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;  
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f4f4;
+}
+a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: #333;
+}
+li {
+  list-style: none; /* 리스트의 기본 표시 요소 삭제 */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 24px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;  /* 100에 특별한 의미없음. 상대적으로 큰 값을 부여하는게 일반적 (9999) */
+}
+
+.navbar-logo a {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar-menu a {
+  display: block; /* 중요: 블록속성으로 바꿔서 클릭 영역을 확보해준다 */
+  font-weight: 600;
+  font-size: 16px;
+  color: #555;
+  padding: 8px 12px;
+  transition: color 0.3s;
+}
+
+.navbar-menu a:hover {
+  color: #e74c3c;
+}
+
+.navbar-menu li {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none; /* 평소에는 숨김 */
+  position: absolute;
+  top: 100%; /* 부모컨텐츠 바로 아래 */
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 10px 0;
+  z-index: 101;  /* 100보다 1크게 */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
