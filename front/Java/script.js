@@ -16,6 +16,18 @@ console.log(username + "님, 환영합니다");
 // console.log('I\m studying Javascript')
 // 특정 목적에서 \ 사용
 
+/*
+<배열의 의미>
+let aaa = 90;
+let bbb = 90;
+...
+비효율=메모리 낭비
+let 학생점수 =[90, 93,...]
+let 학생이름 =[aaa, bbb,...]
+이러면 변수 2개
+여러개의 데이터를 하나의 데이터로 묶음
+*/
+
 // 자료 = 데이터
 // 자료형 = 데이터 타입
 // 숫자(number) 1234

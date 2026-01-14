@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>블로그 포스트</title>
+    <link rel="stylesheet" href="blog.css" />
+  </head>
+  <body>
+    <article class="blog-post">
+      <header class="post-header">
+        <span class="category">기술</span>
+        <h1>CSS 레이아웃의 기초</h1>
+        <div class="post-meta">
+          <span class="author">작성자: 김개발</span>
+          <span class="date">2024년 1월 15일</span>
+          <span class="read-time">5분 소요</span>
+        </div>
+      </header>
+
+      <div class="post-content">
+        <p class="intro">
+          웹 페이지를 만들 때 가장 중요한 것 중 하나는 바로 레이아웃입니다.
+          오늘은 CSS를 이용한 레이아웃의 기본 개념에 대해 알아보겠습니다.
+        </p>
+
+        <h2>박스 모델이란?</h2>
+        <p>
+          모든 HTML 요소는 박스 형태로 이루어져 있습니다. 이 박스는 content,
+          padding, border, margin으로 구성됩니다.
+        </p>
+
+        <blockquote>
+          "디자인은 단순히 어떻게 보이고 느껴지는가가 아니다. 어떻게
+          작동하는가이다." - 스티브 잡스
+        </blockquote>
+
+        <h2>주요 개념</h2>
+        <p>CSS 레이아웃을 이해하기 위해 알아야 할 핵심 개념들입니다:</p>
+
+        <ul>
+          <li>Display 속성: 요소가 화면에 표시되는 방식을 결정합니다</li>
+          <li>Position 속성: 요소의 위치를 지정하는 방법입니다</li>
+          <li>Float: 요소를 좌우로 띄워 배치할 수 있습니다</li>
+          <li>Flexbox: 유연한 박스 레이아웃을 만들 수 있습니다</li>
+        </ul>
+
+        <h2>실전 팁</h2>
+        <ol>
+          <li>항상 박스 모델을 염두에 두고 작업하세요</li>
+          <li>개발자 도구를 활용하여 요소를 검사하세요</li>
+          <li>작은 컴포넌트부터 시작하여 점진적으로 확장하세요</li>
+        </ol>
+
+        <div class="note">
+          <strong>참고:</strong> 최신 브라우저에서는 Flexbox와 Grid를 적극적으로
+          활용하는 것을 권장합니다.
+        </div>
+
+        <h2>결론</h2>
+        <p>
+          CSS 레이아웃은 웹 개발의 기본이자 핵심입니다. 꾸준한 연습을 통해
+          다양한 레이아웃을 자유자재로 구현할 수 있게 될 것입니다.
+        </p>
+      </div>
+
+      <footer class="post-footer">
+        <div class="tags">
+          <span class="tag">CSS</span>
+          <span class="tag">웹개발</span>
+          <span class="tag">레이아웃</span>
+        </div>
+        <div class="share">
+          <span>공유하기:</span>
+          <a href="#">페이스북</a>
+          <a href="#">트위터</a>
+          <a href="#">링크복사</a>
+        </div>
+      </footer>
+    </article>
+  </body>
+</html>
