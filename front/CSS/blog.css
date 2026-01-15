@@ -20,9 +20,11 @@ ul {
 p {
   color: #333;
   line-height: 3;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
-
+.intro {
+  border-bottom: 1px solid rgb(187, 187, 187);
+}
 /* 기술  */
 .category {
   background-color: #3498db;
@@ -33,24 +35,30 @@ p {
 /* 박스모델이란 */
 h2 {
   padding: 30px 0px;
+  border-bottom: 2px solid #3498db;
 }
 
 /* 작성자 */
 .post-meta {
   line-height: 8;
 }
+.date {
+  padding: 0px 50px;
+}
 /* 스티브잡스 */
 blockquote {
   background-color: #e9ecef;
   padding: 15px;
+  border-left: 2px solid blue;
 }
-/* 참고사항 */
+/* 참고박스 */
 .note {
   background-color: rgb(255, 255, 109);
   border: 2px solid orange;
   border-radius: 10px;
   padding: 20px;
 }
+/* 참고 */
 .note strong {
   color: orangered;
 }
@@ -64,6 +72,39 @@ blockquote {
   border-radius: 15px;
   margin: 10px;
 }
-.share {
-  padding-top: 40px;
+.tags {
+  padding-top: 50px;
 }
+/* 공유링크 */
+.share {
+  text-decoration: none;
+  padding-top: 50px;
+}
+a {
+  text-decoration: none;
+  padding: 0px 15px;
+}
+
+/* * = 아스테리스크, % =  modulo ,& = 앰퍼샌트
+
+ == 같은가,!= 다른가 
+
+ if(조건 연산자 예)a==b){ 명령}
+ 조건 설정은 겹치면 안됨
+
+ 12< age <=18  X 지원을 안함
+ age>12 && age<=18 O
+ 이럼 100같은 숫자면 바로 age>12에서 나가버림
+ ↓
+ if(age<=12){
+ 50%할인
+} else if(age>12 && age<=18{
+ 30%
+} else{
+ 0%
+ }
+
+(if{} 다음 else가 들어가야함 (문법임))
+조건문은 전체를 커버해야함 마지막은 else로 끝나도록
+
+ */

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // if 단독 사용
+      let userName;
+      if (userName != undefined) {
+        console.log(userName);
+      }
+      console.log("시작...");
+      console.log("------------------------");
+
+      // if ~ else
+      if (userName != undefined) {
+        console.log(userName);
+      } else {
+        console.log("이름이 없습니다");
+      }
+      console.log("시작...");
+      console.log("------------------------");
+
+      // 연습
+      // parseInt() 형변환함수 : 다른 자료형을 정수형으로 변환해주는 함수
+      let userNumber = parseInt(prompt("숫자를 입력하세요."));
+      //   if (userNumber % 2 == 0) {
+      //     document.write("짝수입니다");
+      //     console.log("짝수입니다");
+      //   } else {
+      //     document.write("홀수입니다");
+      //     console.log("홀수입니다");
+      //   }
+
+      // 수정본
+      // NaN : Not a Number 숫자아님
+      if (Number.isNaN(userNumber)) {
+        console.log(userNumber); // NaN
+        document.write("숫자만 입력해줄래??");
+      } else if (userNumber % 2 == 0) {
+        document.write("짝수입니다");
+        console.log("짝수입니다");
+      } else {
+        document.write("홀수입니다");
+        console.log("홀수입니다");
+      }
+
+      // 중첩된 if 문
+      let isLoggedIn = true; // 불리언타입(참,거짓) 로그인 했는지 여부를 저장
+      let isAdmin = false; // 불리언타입(참,거짓) 관리자인자 여부를 저장
+
+      if (isLoggedIn) {
+        if (isAdmin) {
+          console.log("관리자 접근");
+        } else {
+          console.log("일반 사용자 접근");
+        }
+      } else {
+        console.log("로그인이 필요");
+      }
+    </script>
+  </body>
+</html>

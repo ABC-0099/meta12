@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //배열대신 변수를 사용하면 4갸의 변수와 화면 출력을 위헤 4개의 consle.log 명령어 필여
+      let spring = "봄";
+      let summer = "여름";
+      let fall = "가을";
+      let winter = "겨울";
+      console.log(spring);
+      console.log(summer);
+      console.log(fall);
+      console.log(winter);
+
+      // 배열 사용의 예
+      // 1개의 변수와 한번의 console.log 사용
+      // index(예, [0])를 이용하면 개별 아이템을 가져올 수 있음
+      let season = ["봄", "여름", "가을", "겨울"];
+      console.log(season);
+      console.log(season[0]); //봄
+      console.log(season[3]); //겨울
+
+      // 참고
+      // 인용부호를 이용하여 만들어진 문자열은 유사배열로 취급함
+      // 예) winter는 ["겨","울"]과 같ㅇ느 형태로 인식
+      // 그로므로 마치 배열처럼 문자 하나 하나를 따로 취급할 수 있음
+      // 하지만 숫자는 유사배열 아님!
+      let number1 = 1000; // 숫자
+      console.log(number1[0]); //undefind
+      let number2 = "10000"; // 유사배열
+      console.log(number2[0]); // "1"
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //if 단독 사용
+      let userName;
+      if (userName != undefined) {
+        console.log(userName);
+      }
+      console.log("시작...");
+      console.log("-------------");
+
+      //if ~ else
+      if (userName != undefined) {
+        console.log(userName);
+      } else {
+        console.log("이름이 없습니다");
+      }
+      console.log("시작...");
+      console.log("-------------");
+
+      //연습
+      //parseInt() 형변환함수: 다른 자료형을 정수형으로 변환해주는 함수
+      let userNumber = parseInt(prompt("숫자를 입력하세요"));
+      // if (userNumber % 2 == 0) {
+      //   document.write("짝수임");
+      //   console.log("짝수임");
+      // } else {
+      //   console.log("홀수임");
+      //   document.write("홀수임");
+      // }
+
+      //수정본
+      // NaN : Not a Number  숫자아님
+      if (Number.isNaN(userNumber)) {
+        console.log(userNumber); //NaN
+        document.write("숫자만");
+      } else if (userNumber % 2 == 0) {
+        document.write("짝수임");
+        console.log("짝수임");
+      } else {
+        console.log("홀수임");
+        document.write("홀수임");
+      }
+      // 중첩된  if 문
+      let isLoggedIn = true; // 불리언타입(참, 거짓)
+      let isAdmin = false; // 불리언타입(참, 거짓) 관리자인자 여부 저장
+
+      if (isLoggedIn) {
+        if (isAdmin) {
+          console.log("관라자 접근"); //관리자 접근 허용
+        } else {
+          console.log("일반 사용자 접근"); // 일반 사용자 접근
+        }
+      } else {
+        console.log("로그인이 필요"); //로그인이 필요
+      }
+      //if{}, if{}면 다른 조건문이 됨
+    </script>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //if 단독 사용
+      let userName;
+      if (userName != undefined) {
+        console.log(userName);
+      }
+      console.log("시작...");
+      console.log("-------------");
+
+      //if ~ else
+      if (userName != undefined) {
+        console.log(userName);
+      } else {
+        console.log("이름이 없습니다");
+      }
+      console.log("시작...");
+      console.log("-------------");
+
+      //연습
+      //parseInt() 형변환함수: 다른 자료형을 정수형으로 변환해주는 함수
+      let userNumber = parseInt(prompt("숫자를 입력하세요"));
+      // if (userNumber % 2 == 0) {
+      //   document.write("짝수임");
+      //   console.log("짝수임");
+      // } else {
+      //   console.log("홀수임");
+      //   document.write("홀수임");
+      // }
+
+      //수정본
+      // NaN : Not a Number  숫자아님
+      if (Number.isNaN(userNumber)) {
+        console.log(userNumber); //NaN
+        document.write("숫자만");
+      } else if (userNumber % 2 == 0) {
+        document.write("짝수임");
+        console.log("짝수임");
+      } else {
+        console.log("홀수임");
+        document.write("홀수임");
+      }
+      // 중첩된  if 문
+      let isLoggedIn = true; // 불리언타입(참, 거짓)
+      let isAdmin = false; // 불리언타입(참, 거짓) 관리자인자 여부 저장
+
+      if (isLoggedIn) {
+        if (isAdmin) {
+          console.log("관라자 접근"); //관리자 접근 허용
+        } else {
+          console.log("일반 사용자 접근"); // 일반 사용자 접근
+        }
+      } else {
+        console.log("로그인이 필요"); //로그인이 필요
+      }
+      //if{}, if{}면 다른 조건문이 됨
+
+      //조건연산자 (삼항연산자)
+      //기본 if~else의 한줄짜리 버전
+      const num = 10;
+      if (num % 2 == 0) {
+        console.log("짝");
+      } else {
+        console.log("홀");
+      }
+
+      // 위 조건문을 한줄짜리 조건연산자 (삼항연산자)로 표현
+      //(조건) ? 참일때 명령 : 거짓일때 명령;
+      // 이 코드는 조건과 명령이 모두 짧을때 (1줄) 주로 사용함()
+      num % 2 == 0 ? console.log("짝") : console.log("홀");
+
+      /*
+        논리 연산자 ||, &&, !
+        1) OR 연산자 ||(true가 하나라도 있으며 결과도 true)
+        false || false = false
+        false || true = true
+        true || false = true
+        true || true = true
+
+        2 AND 연산자 &&(모두true일때 결과가 true)
+        false && false = false
+        false && true = false
+        true && false = false
+        true && true = true
+
+        1) NOT 연산자 !(반대)
+        true = false
+        false = true
+        */
+
+      // switch문 예제
+      //break;명령은 이제 switch문을 그만 수헹하라는 뜻
+      let session = prompt(
+        "관심 세션을 선택해 주세요 1-마케팅, 2-개발, 3-디자인"
+      );
+
+      switch (session) {
+        case "1":
+          document.write("<p> 마케팅 세션은<strong>201호</strong></p>");
+          break;
+        case "2":
+          document.write("<p> 개발 세션은<strong>203호</strong></p>");
+          break;
+        case "3":
+          document.write("<p> 디자인 세션은<strong>205호</strong></p>");
+          break;
+        default:
+          alert("잘못입력");
+      }
+    </script>
+  </body>
+</html>

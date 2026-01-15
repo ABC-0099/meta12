@@ -1,0 +1,185 @@
+1. CSS display 속성
+
+요소가 화면에 어떻게 배치될지를 결정하는 속성
+
+🔹 inline
+
+한 줄에 나란히 배치됨
+
+width / height 적용 불가
+
+margin, padding은 좌우만 적용
+
+예: span, a
+
+🔹 block
+
+한 줄을 혼자 차지
+
+width / height 적용 가능
+
+margin, padding 전부 적용
+
+예: div, p, h1
+
+🔹 inline-block
+
+한 줄에 배치되지만
+
+width / height 적용 가능
+
+inline + block의 장점 결합
+
+🔹 flex
+
+1차원 레이아웃(가로 또는 세로)
+
+자식 요소들을 유연하게 정렬
+
+기본 방향: 가로(row)
+
+🔹 grid
+
+2차원 레이아웃(행 + 열)
+
+복잡한 레이아웃에 적합
+
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+
+🔹 none
+
+요소가 화면에서 완전히 사라짐
+
+공간도 차지하지 않음
+
+2. CSS position 속성
+
+요소의 위치 기준을 정의
+
+🔹 static (기본값)
+
+일반적인 문서 흐름을 따름
+
+top, left 등 사용 불가
+
+🔹 relative
+
+자기 자신 위치 기준으로 이동
+
+원래 있던 공간은 유지됨
+
+🔹 absolute
+
+가장 가까운 position이 있는 부모 기준
+
+문서 흐름에서 제거됨
+
+🔹 fixed
+
+브라우저 화면 기준
+
+스크롤해도 위치 고정
+
+🔹 sticky
+
+평소엔 relative
+
+스크롤 시 특정 위치에서 fixed처럼 동작
+
+3. Flexbox (Flexible Box Layout)
+📌 정의
+
+**한 방향(가로 또는 세로)**으로 요소를 정렬하고 배치하는 레이아웃 시스템
+
+📌 특징
+
+주축(Main Axis) & 교차축(Cross Axis)
+
+정렬, 간격 조정이 매우 편리
+
+반응형 UI에 강함
+
+📌 주요 속성
+
+부모 요소
+
+display: flex
+
+flex-direction
+
+justify-content
+
+align-items
+
+flex-wrap
+
+자식 요소
+
+flex
+
+flex-grow
+
+flex-shrink
+
+flex-basis
+
+align-self
+
+📌 사용 예
+
+네비게이션 바
+
+버튼 정렬
+
+카드 리스트
+
+4. Grid (CSS Grid Layout)
+📌 정의
+
+**행(Row)과 열(Column)**을 동시에 사용하는 2차원 레이아웃 시스템
+
+📌 특징
+
+레이아웃 구조를 먼저 설계
+
+복잡한 페이지 구성에 적합
+
+정확한 위치 제어 가능
+
+📌 주요 속성
+
+부모 요소
+
+display: grid
+
+grid-template-columns
+
+grid-template-rows
+
+gap
+
+grid-template-areas
+
+자식 요소
+
+grid-column
+
+grid-row
+
+grid-area
+
+📌 사용 예
+
+전체 페이지 레이아웃
+
+대시보드
+
+갤러리 레이아웃
+
+5. Flexbox vs Grid 요약
+구분	Flexbox	Grid
+방향	1차원	2차원
+목적	요소 정렬	전체 레이아웃
+사용 난이도	쉬움	중간
+적합한 경우	간단한 정렬	복잡한 구조
