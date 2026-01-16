@@ -1,3 +1,12 @@
-hi
-123123123
-a
+      /*
+      <break와 continue>
+      break:는 반복문을 즉시 종료시키는 명령
+      continue: 현재의 반복만  건너뛰고 다음 반복을 수행시키는 명령
+      */
+      console.log("---------------------------")
+      for(let i=0; i<5; i++){
+        if(i == 3){
+            break;
+        }
+      console.log(i); // 0 1 2(3번만 반복)
+      }

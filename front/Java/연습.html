@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let password = "pass";
+      if (password.length < 8) {
+        console.log("비밀번호는 최소 8자 이상이어야");
+      } else {
+        console.log("안전한 비밀번호입니다, 저장합니다.");
+      }
+
+      let userRole = "Guest";
+      if (userRole !== userRole) {
+        console.log("관리자만 접근가능");
+      } else {
+        console.log("관리자 페이지에 접속");
+      }
+
+      let fileSize = 7500;
+      let limit = 5000;
+      if (limit < fileSize) {
+        console.log("너무큼");
+      } else {
+        console.log("ok");
+      }
+
+      let Number = 7;
+      if (Number % 2 == 0) {
+        console.log("짝");
+      } else {
+        console.log("홀");
+      }
+
+      let isDarkmode = true;
+      if (isDarkmode == true) {
+        isDarkmode = false;
+        console.log("라이트 전환");
+      } else {
+        isDarkmode = true;
+        console.log("다크 전환");
+      }
+
+      let networkspeed = 15;
+      if (networkspeed >= 50) {
+        console.log("초고화질");
+      } else if (networkspeed >= 20) {
+        console.log("고화질");
+      } else {
+        console.log("절약");
+      }
+
+      let damge = 100;
+      let critRate = 20;
+      let radomVal = Math.floor(Math.random() * 100) + 1;
+      if (radomVal <= 20) {
+        damge = damge * 2;
+        console.log("크리티컬" + damge);
+      } else {
+        console.log("일반" + damge);
+      }
+
+      let inputCode = "Welcome2026";
+      let price = 20000;
+      if (inputCode == inputCode) {
+        price = price * 0.9;
+        console.log("할인" + price);
+      } else {
+        console.log("업슴");
+      }
+
+      let searchResults = [];
+
+      if (searchResults.length == 0) {
+        console.log("ㅁ" + "자바스크립트" + "에 대한 결과가 없음");
+      } else {
+        console.log("총" + searchResults + "건의 결과가 발견");
+      }
+
+      let Day = "일요일";
+      if (Day === "일요일" || Day === "토요일") {
+        console.log("주말");
+      } else {
+        console.log("평일");
+      }
+
+      let score = 85;
+      if (score >= 90) {
+        console.log("A");
+      } else if (score >= 80) {
+        console.log("B");
+      } else {
+        console.log("c");
+      }
+
+      let age = 70;
+      if (age < 8 || age >= 65) {
+        console.log("할인");
+      } else {
+        console.log("no");
+      }
+
+      let Age = 15;
+      if (Age >= 13 && Age <= 19) {
+        console.log("소년");
+      } else {
+        console.log("no");
+      }
+
+      let temp = 5;
+      if (temp > 28) {
+        console.log("더움");
+      } else if (temp < 10) {
+        console.log("추움");
+      } else {
+        console.log("good");
+      }
+
+      let inputId = "1234";
+      let inputPW = "user";
+      if (inputId === inputId || inputPW === inputPW) {
+        console.log("환영");
+      } else {
+        console.log("ㄴㄱ");
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+반복문
+1 for  
+    초기값, 조건, 증가식
+for(let i=0; i<n;i++){
+console.log(i);
+} 
+
+2번은 배열 순회
+2 for..of
+                 0      1       2
+const fruits = ["사과", "바나나", "딸기"];
+for(const x of fruits){
+console.log(x);
+}
+
+3번도 배열 순회
+3 foreach
+
+배열.foreach(funtion(x)){
+console.log(x);
+}
+
+4 while
+
+let count = 0
+while(count<3){
+console.log(count);
+count++;
+}
+
+5 do while
+
+do{
+console.log(count);
+count++;
+}while(count<3)
+
+4, 5번 차이는 무조건 최초1회 실행
+
+
+-->
