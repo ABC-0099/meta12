@@ -117,6 +117,7 @@ li {
   }
 
   .navbar-menu {
+    display: none; /* 모바일 사이즈에서 평소에는 안보임. 햄버거 버튼을 클릭하면 보여야함 */
     flex-direction: column;
     width: 100%;
     margin-top: 10px;
@@ -125,7 +126,9 @@ li {
   }
 
   /* JS로 active 클래스가 붙으면 보이기 */
+  /* JS 에서 햄버거 버튼을 클릭하면 .active가 생겼다가 사라졌다 함 (= 토글)*/
   .navbar-menu.active {
+    display: flex;
   }
 
   .navbar-menu li {
