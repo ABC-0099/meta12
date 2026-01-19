@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 객체 만드는 법
+      // 키:밸류의 쌍으로 저장
+      // 모든 자료형을 저장할 수 있음,숫자, 문자, 불리언, 배열, 다른객체,"객체의배열"....
+      // key는 이름표의 역할, value는 내용물의 역할
+      // {}은 배열 []객체
+      let hero = {
+        name: "아이언맨",
+        age: 40,
+        isAlive: true,
+      };
+      let anoterHero = {
+        name: "닥터스트레인지",
+        age: 30,
+        isAlive: true,
+      };
+      // 1.조회하기 (객체이름.키이름);
+      console.log(hero.name);
+      console.log(hero.age);
+      console.log(hero.isAlive);
+      console.log(anoterHero.name);
+      console.log(anoterHero.age);
+      console.log(anoterHero.isAlive);
+
+      // 2.수정하기
+      // 값을 바꾸려면 변수처럼 값을 다시 대입하면 됨
+      hero.age = 41;
+      console.log(hero.age); //41
+
+      // 3.추가하가ㅣ(새로운 속성추가)
+      // 객체에 새로운 정보를 추가하는것은 그냥(.)을 찍고 새로운 속성을 추가하면 됨
+      hero.color = "Red"; //기존에 없던 color라는 속성을 추가
+      anoterHero.color = "Blue";
+      console.log(hero.color);
+      console.log(anoterHero.color);
+
+      // 객체의 배열을 이용한 예제
+      // 4개의 객체를 가지고 있는 배열
+      const students = [
+        { name: "김철수", score: 85 },
+        { name: "이영희", score: 92 },
+        { name: "박민수", score: 78 },
+        { name: "정지은", score: 95 },
+      ];
+      let totalScore = 0;
+      for (const item of students) {
+        totalScore = totalScore + item.score;
+        //totalScore += item.score;  위 코드의 단축표현
+        // console.log("총점: " + totalScore + "점");
+
+        // <중요> 백틱문법 `
+        // 문자열과 변수를 섞어서 새로운 문자열을 만들때 가장 좋은 방법, 반드시 기억!
+        console.log(`총점: ${totalScore}점`);
+      }
+      console.log(`최종 총점은 ${totalScore}점`);
+
+      // 할인 가격 계산하기
+      const items = [
+        { name: "티셔츠", price: 25000 },
+        { name: "청바지", price: 50000 },
+        { name: "운동화", price: 80000 },
+      ];
+      for (const data of items) {
+        const discountPrice = data.price * 0.8;
+        // console.log(`${data.name}:${discountPrice}원`);
+        console.log(`${data.name}:${discountPrice.toLocaleString()}원`);
+        // toLocaleString() - 객체의 내장 속성 함수
+        // 현지 언어/형식에 맞게 문자열을 바꿔라
+        // 숫자에 사용하면 화폐단위나 쉼표를 찍어줌
+        // 날짜에 사용하면 날짜포맷을 그나라에 맞춰서 바꿔줌
+        let today = new Date();
+        console.log(today.toLocaleString()); // 2026. 1. 19. 오전 11:40:11
+
+        // 객체에 점을 찍고 사용할 수 있는 속성은 두가지
+        // data.name 또는 data.price 와 같이 변수처럼 사용 : 프로퍼티(property)
+        // price.toLcalestring()처럼 ()를 뒤에 붙여서 사용 : 함수(funtion) 또는 메서드(method)
+        // 프로퍼티는 객체의 특징이며 "값(value)"
+        // 함수는 그 프로퍼티를 이용하여 특정한 변화를 수행하는 "동작"
+      }
+    </script>
+  </body>
+</html>

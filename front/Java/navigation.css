@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;  
+  padding: 0;
 }
 body {
   font-family: "Poppins", sans-serif;
@@ -21,10 +21,10 @@ li {
   align-items: center;
   background-color: white;
   padding: 10px 24px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 100;  /* 100에 특별한 의미없음. 상대적으로 큰 값을 부여하는게 일반적 (9999) */
+  z-index: 100; /* 100에 특별한 의미없음. 상대적으로 큰 값을 부여하는게 일반적 (9999) */
 }
 
 .navbar-logo a {
@@ -63,12 +63,107 @@ li {
   transform: translate(-50%, 0);
   background-color: white;
   min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 10px 0;
-  z-index: 101;  /* 100보다 1크게 */
+  z-index: 101; /* 100보다 1크게 */
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.dropdown-content li a {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.dropdown-content li a:hover {
+  background-color: #f5faff;
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+}
+
+.btn-login {
+  background-color: #2c3e50;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: background-color 0.3;
+}
+.btn-login:hover {
+  background-color: #1a252f;
+}
+
+.navbar-toggleBtn {
+  display: none;
+  font-size: 24px; /*외부에서 가져온 아이콘은 폰트크기로 조절*/
+  color: #2c3e50;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* [반응형 - 모바일 (768px 이하)] */
+/* 미디어 쿼리는 반드시 css 의 제일 아래 부분에 작성해야함 */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start; /* 왼쪽 정렬*/
+    padding: 16px 24px;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+    gap: 0;
+    /* 갭 덮어쓰기  */
+  }
+
+  /* JS로 active 클래스가 붙으면 보이기 */
+  .navbar-menu.active {
+  }
+
+  .navbar-menu li {
+    width: 100%;
+  }
+
+  .navbar-menu a {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  .dropdown-content {
+    /* 모바일에서는 호버가 안되므로 absolute로 지정했던 모든 스타일링을 기본으로 변경함 */
+    display: block;
+    position: static;
+    box-shadow: none;
+    background-color: #f9f9f9;
+    width: 100%;
+    transform: none;
+    padding: 0;
+  }
+
+  .dropdown-content li a {
+    padding-left: 40px;
+    font-size: 14px;
+    color: #777;
+  }
+
+  /* 햄버거 버튼 보이기 & 위치 잡기 */
+  .navbar-toggleBtn {
+    display: block;
+    position: absolute;
+    right: 24px;
+    top: 18px;
+  }
+
+  /* 모바일에서 로그인 버튼 숨김 */
+  .btn-login {
+    display: none;
+  }
 }
