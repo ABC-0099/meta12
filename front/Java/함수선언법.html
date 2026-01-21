@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // *** 함수 선언 방법 4가지 ****
+      // 1. funtion 예약어를 이용한 호이스팅이 가능한 선언법  -> 코드 위치가 상관없음 근데 요즘 안쓰임
+      // funtion foo(){}
+      function addNumber(num1, num2) {
+        let sum = num1 + num2;
+        return sum;
+      }
+      console.log(addNumber(2, 3));
+
+      // 2. fnution 예약어를 이용한 함수이름이 없는 "익명함수" 선언법
+      // const foo = function(){}   -> 함수의 선언을 변수에 담음 자바스크립트, 파이썬만 ㄱㄴ
+      // 함수는 변수에 담으면 무한한 자유도
+      let sum = function (num1, num2) {
+        return num1 + num2;
+      };
+      console.log(sum(2, 3));
+      // 1번과 같은코드
+
+      // 3. 즉시실행 함수 선언법  ->  딱 한번만 실행하기 위해서, 주로 초기화, 함수 재사용성 X 1,2,4은 있음
+      // (function() {}) ();
+      const result = (function (num1, num2) {
+        return num1 + num1;
+      })(2, 3);
+      console.log(result);
+      // 4. 화살표 함수 선언법 ( 익명 함수 )
+      // const foo = () => {};
+      // 화살표함수는 return 예약어를 사용하지 않는 경우가 많음
+      // 주로 짧은 실행코드를 가진 함수를 선언할 때 자주 사용하기 때문.
+      // * 규칙 *
+      // 애로우함수 내에 {}를 쓰면 return을 사용
+      // 반대로 return이 없으려면 {} 역시 생략해아함
+      let sum2 = (num1, num2) => {
+        return num1 + num2;
+      };
+      let sum3 = (num1, num2) => num1 + num2;
+      console.log(sum2(2, 3));
+      console.log(sum3(2, 3));
+    </script>
+  </body>
+</html>

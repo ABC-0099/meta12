@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const eleProducts = [
+        { name: "노트북", price: 1000000 },
+        { name: "마우스", price: 30000 },
+        { name: "키보드", price: 80000 },
+      ];
+      const data = eleProducts.map((e) => ({
+        name: e.name,
+        price: e.price,
+        data: e.price * 1.1,
+      }));
+      console.log(data);
+    </script>
+  </body>
+</html>

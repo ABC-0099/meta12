@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 함수의 선언부
+      // 이 코드영역은 즉시 실행되지 않고 반드시 함수의 호출이 발생해야함
+      // funtion 예약어를 사용하는 함수의 선언부는 코드의 위치와 상관없음
+      // (페이지 아래 부분에 있더라도 출력됨)
+      function sum() {
+        let n = 10; // 블록 스코프 변수(= 지역변수)
+        let result = 0; // 블록 숰ㅎ푸 뱐수 (= 지역변수)
+        for (let i = 1; i <= n; i++) {
+          result += i;
+        }
+        console.log(result);
+      }
+      let global = 10; // 글로벌 스코프 변수( = 전역변수)
+      sum();
+      //console.log(result); // 오류발생. 지역변수이므로 sum()함수의 종료시 삭제됨
+      console.log(global); // 정상출력, 전역변수
+
+      /// 매게변수 , 인수, return
+      function addNumber(num1, num2) {
+        // num1 과 num2 는 매개 변수
+        let sum = num1 + num2;
+        return sum; // 리턴
+
+        // 잊지말고 retur을 넣을것 넣을게 없으면 return true
+      }
+      let value = addNumber(2, 3); // 2와 3은 인수
+      console.log(value);
+    </script>
+  </body>
+</html>
+<!--  
+    함수란,
+  여러 동작을 묶은 덩어리
+  미리 정의된 특별한 동작을 수행하느 기계상자
+  
+  구성요소
+  1. 함수 선언부
+  2. 매개변수 (parameter) 또는 인수 (argument)
+  3. 리턴값(return value)
+
+  함수 왜 씀>?
+  - 함수가 수행하는 특별한 동작이 아~~~~주 자주 사용될 때
+  - 함수 내부의 동작을 숨겨야 할 때
+  - 가독성 향상, 유지보서성 향상
+  - 역할분리, 협업에 유리
+   -->

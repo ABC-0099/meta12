@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.쇼핑몰 부가세 계산(유지보수 향상)
+      // 아래 코드는 모든 상품에 거의 동일하 코드가 계속해서 반복되고 있음
+      // 수정사항이 발생했을때 모든 코드를 찾아서 수정해야함 ... 비효율
+      let price1 = 1000000;
+      let tax1 = price1 * 0.1;
+      let total1 = price1 + tax1;
+      console.log("노트북 최종가: " + total1);
+
+      let price2 = 50000;
+      let tax2 = price2 * 0.1;
+      let total2 = price2 + tax2;
+      console.log("마우스 최종가: " + total2);
+
+      let price3 = 150000;
+      let tax3 = price3 * 0.1;
+      let total3 = price3 + tax3;
+      console.log("기계식키보드 최종가: " + total3);
+
+      // 함수로 해셜
+      // 함수 선언 (에로우 함수)
+      const calculateTotal = (price) => {
+        const tax = price * 0.1;
+        return price + tax;
+      };
+      // 함수 호출
+      console.log("노트북 최종가: ", calculateTotal(1000000));
+      console.log("마우스 최종가: ", calculateTotal(50000));
+      console.log("기계식키보드 최종가: ", calculateTotal(1500000));
+
+      // 2. 회원가입 환여 이메일 템필릿
+      //  비효율 코드
+      let user1 = "김철수";
+      console.log(
+        user1 + "회원가입을 축하합니디 저희 서비스 이용약관을 확인해주세욘",
+      );
+      let user2 = "이영희";
+      console.log(
+        user2 + "회원가입을 축하합니디 저희 서비스 이용약관을 확인해주세욘",
+      );
+      let user3 = "박지성";
+      console.log(
+        user3 + "회원가입을 축하합니디 저희 서비스 이용약관을 확인해주세욘",
+      );
+
+      //함수를 이영하여 깔끔한 코드르 작성할 수 있음
+      const getWelcomeMail = (userName) => {
+        return userName + welcomeMsg;
+      };
+      // 선택옵션
+      const welcomeMsg = "님, 회원가입을 축하합니다";
+
+      console.log(getWelcomeMail("김철수", welcomeMsg));
+      console.log(getWelcomeMail("이영희", welcomeMsg));
+      console.log(getWelcomeMail("박지성", welcomeMsg));
+
+      // 3 비밀번호 유효성 검사
+      // 비효울 코드
+      // 로그인 초기에 비밀번호 검사 코드
+      let inputPw1 = "1234";
+      if (inputPw1.length >= 8) {
+        console.log("사용 가능한 비밀번호입니다");
+      } else {
+        console.log("비밀번호는 8자리 이상이어야 합니다");
+      }
+      // ...... 수백줄의 다른 실행코드가 있다고 가정....
+
+      // 유저가 비밀번호 변경시도
+      // 위에서 수행했던 검사 코드를 아래에서 또 적어야 하는 문제 발생
+      let inputPw2 = "password1234";
+      if (inputPw2.length >= 8) {
+        console.log("사용 가능한 비밀번호입니다");
+      } else {
+        console.log("비밀번호는 8자리 이상이어야 합니다");
+      }
+
+      // 함수로 해결
+      const isValidPassword = (password) => {
+        if (password.length >= 8) {
+          return "사용가능한 비밀번호입니다";
+        } else {
+          return "비밀번호는 8자리 이상이어야 합니다";
+        }
+      };
+      // 패스워드를 검색하는 모든 곳에서 isValidPassword() 함수를 호출하면 끝
+      // 함수의 재사용성!
+      console.log(isValidPassword("12341234"));
+    </script>
+  </body>
+</html>
