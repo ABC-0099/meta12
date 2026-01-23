@@ -21,16 +21,6 @@
         font-family: "Italianno";
         height: 1500px;
       }
-
-      .head {
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 60px;
-        font-size: 100px;
-      }
-
       .topbar {
         display: flex;
         justify-content: center;
@@ -39,7 +29,15 @@
         color: white;
         font-size: 36px;
         position: fixed;
-        width: 100vw;
+        width: 100%;
+      }
+
+      .head {
+        color: white;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+        font-size: 100px;
       }
 
       .season:hover {
@@ -47,29 +45,23 @@
         transition: all 0.3s;
         cursor: pointer;
       }
-        .profile {
-          width: 1000px;
-          height: 700px;
-          border-radius: 50px;
-          border: 5px solid white;
-        }
-        .back img{
-          padding-top: 30px;
-    position: fixed;
-
-    top: 0;
-    left: 0;
-    z-index: -999;
-    width: 100%;
-    height: 100%;
-
-}
-
-
+      .profile {
+        width: 1000px;
+        height: 700px;
+        border-radius: 50px;
+        border: 5px solid white;
+      }
+      .back img {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -999;
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
-
     <div class="topbar">
       <div class="season">Home</div>
       <div class="season">Spring</div>
@@ -78,11 +70,13 @@
       <div class="season">Winter</div>
     </div>
 
-      <div class="head">Four Season</div>
-      <div class="back">
-        <img src="https://p4.wallpaperbetter.com/wallpaper/672/671/623/four-seasons-02-1920x1080-nature-seasons-hd-art-wallpaper-preview.jpg"  
-        alt="">
-      </div>
+    <div class="head">Four Season</div>
+
+    <div class="back">
+      <img
+        src="https://p4.wallpaperbetter.com/wallpaper/672/671/623/four-seasons-02-1920x1080-nature-seasons-hd-art-wallpaper-preview.jpg"
+        alt=""
+      />
     </div>
   </body>
 </html>
