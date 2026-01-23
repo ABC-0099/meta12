@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>기본 모달 예제</title>
+    <style>
+      /* 기본 스타일 초기화 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* 버튼 스타일 */
+      .btn {
+        padding: 15px 25px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: white;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      /* 모달 오버레이 (배경) */
+      .modal-overlay {
+        display: none; /* 기본적으로 숨김 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      /* active 클래스가 붙으면 보임 */
+      .modal-overlay.active {
+        display: flex;
+        animation: fadeIn 0.3s;
+      }
+
+      /* 모달 박스 스타일 */
+      .modal {
+        background: white;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+        animation: slideDown 0.3s;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      /* 모달 헤더 */
+      .modal-header {
+        padding: 25px;
+        border-bottom: 2px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h3 {
+        color: #333;
+        font-size: 1.5em;
+        margin: 0;
+      }
+
+      /* 닫기 버튼 (X) */
+      .modal-close {
+        width: 35px;
+        height: 35px;
+        border: none;
+        background: #e9ecef;
+        border-radius: 50%;
+        font-size: 1.5em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        transition: all 0.3s;
+      }
+
+      .modal-close:hover {
+        background: #dc3545;
+        color: white;
+        transform: rotate(90deg);
+      }
+
+      /* 모달 본문 */
+      .modal-body {
+        padding: 25px;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* 모달 하단 */
+      .modal-footer {
+        padding: 20px 25px;
+        border-top: 2px solid #e9ecef;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      /* 애니메이션 */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn" onclick="openModal()">기본 모달 열기</button>
+
+    <div
+      class="modal-overlay"
+      id="modalOverlay"
+      onclick="closeModalOnOverlay(event)"
+    >
+      <div class="modal">
+        <div class="modal-header">
+          <h3>📢 공지사항</h3>
+          <button class="modal-close" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <p>안녕하세요! 이것은 기본적인 모달 창입니다.</p>
+          <p>필요한 기능만 깔끔하게 정리했습니다.</p>
+          <p>오버레이를 클릭하거나 ESC 키를 눌러 닫을 수 있습니다.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" onclick="closeModal()">확인</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const overlay = document.querySelector("#modalOverlay");
+
+      function openModal() {
+        overlay.classList.add("active");
+        // keydown 이벤트는 대상을 document에 등록한다
+        // 항상 keydown 이벤트를 발생시키는것이 아니라 모달창이 열렸을때만 발생하도록 설정
+        document.addEventListener("keydown", handleEscKey);
+      }
+
+      function closeModal() {
+        overlay.classList.remove("active");
+        // 모달창이 닫혀있으면 keydown 이벤트 모니터링 안함
+        document.removeEventListener("keydown", handleEscKey);
+      }
+
+      // 모달창 뒤에 오버레이부분을 클릭했을때 창 닫기
+      function closeModalOnOverlay(event) {
+        console.log(event.target);
+        console.log(event.currentTarget);
+        if (event.target === overlay) {
+          overlay.classList.remove("active");
+        }
+      }
+
+      function handleEscKey(event) {
+        console.log(event);
+        if (event.key === "Escape") {
+          closeModal();
+        }
+      }
+    </script>
+  </body>
+</html>

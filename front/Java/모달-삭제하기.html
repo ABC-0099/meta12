@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>삭제 확인 모달 예제</title>
+    <style>
+      /* 초기화 및 레이아웃 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #f093fb 0%,
+          #f5576c 100%
+        ); /* 경고 느낌 배경 */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* 버튼 스타일 */
+      .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
+        transition: transform 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-danger {
+        background: #dc3545;
+      }
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      /* 결과 메시지 박스 */
+      .result-box {
+        padding: 15px 25px;
+        background: white;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: none; /* 평소엔 숨김 */
+        color: #155724;
+        font-weight: bold;
+        animation: slideUp 0.3s;
+      }
+
+      /* 모달 오버레이 */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-overlay.active {
+        display: flex;
+        animation: fadeIn 0.2s;
+      }
+
+      /* 모달 박스 */
+      .modal {
+        background: white;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 400px; /* 확인 모달은 작게 */
+        text-align: center; /* 내용 가운데 정렬 */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: popIn 0.3s;
+      }
+
+      .modal-body {
+        padding: 40px 20px 20px;
+      }
+      .modal-icon {
+        font-size: 4em;
+        margin-bottom: 15px;
+      }
+      .modal-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      .modal-desc {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .modal-footer {
+        padding: 15px;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      /* 애니메이션 */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn btn-danger" onclick="openModal()">🗑️ 항목 삭제</button>
+
+    <div id="resultBox" class="result-box"></div>
+
+    <div
+      class="modal-overlay"
+      id="modalOverlay"
+      onclick="closeModalOnOverlay(event)"
+    >
+      <div class="modal">
+        <div class="modal-body">
+          <div class="modal-icon">🗑️</div>
+          <h3 class="modal-title">정말로 삭제하시겠습니까?</h3>
+          <p class="modal-desc">이 작업은 되돌릴 수 없습니다.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal()">취소</button>
+          <button class="btn btn-danger" onclick="handleDelete()">
+            삭제하기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const overlay = document.getElementById("modalOverlay");
+      const resultBox = document.getElementById("resultBox");
+
+      // 1. 모달 열기
+      function openModal() {
+        overlay.classList.add("active");
+        document.addEventListener("keydown", handleEscKey);
+      }
+
+      // 2. 모달 닫기
+      function closeModal() {
+        overlay.classList.remove("active");
+        document.removeEventListener("keydown", handleEscKey);
+      }
+
+      // 3. 실제 삭제 동작 처리
+      function handleDelete() {
+        closeModal(); // 모달 닫기
+
+        // 결과 메시지 보여주기
+        resultBox.textContent = "✅ 삭제가 완료되었습니다.";
+        resultBox.style.display = "block";
+
+        // 3초 뒤 결과 메시지 숨기기
+        setTimeout(() => {
+          resultBox.style.display = "none";
+        }, 3000);
+      }
+
+      // 오버레이 클릭 시 닫기
+      function closeModalOnOverlay(e) {
+        if (e.target === overlay) {
+          closeModal();
+        }
+      }
+
+      // ESC 키로 닫기
+      function handleEscKey(e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      }
+    </script>
+  </body>
+</html>
