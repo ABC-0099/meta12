@@ -21,6 +21,7 @@
         font-family: "Italianno";
         height: 1500px;
       }
+
       .topbar {
         display: flex;
         justify-content: center;
@@ -33,11 +34,13 @@
       }
 
       .head {
-        color: white;
         display: flex;
         justify-content: center;
+        align-items: center;
+        color: white;
         padding-top: 40px;
         font-size: 100px;
+        
       }
 
       .season:hover {
@@ -51,6 +54,19 @@
         border-radius: 50px;
         border: 5px solid white;
       }
+      .abcd{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(255, 238, 219);
+        gap: 200px;
+        font-size: 28px;
+        padding-top: 500px;
+        position: fixed;
+        width: 100%;
+
+      }
+
       .back img {
         position: fixed;
         top: 0;
@@ -62,15 +78,23 @@
     </style>
   </head>
   <body>
+    <div class="container">
     <div class="topbar">
       <div class="season">Home</div>
-      <div class="season">Spring</div>
-      <div class="season">Summer</div>
-      <div class="season">Fall</div>
-      <div class="season">Winter</div>
+      <div class="season">Spring🌸</div>
+      <div class="season">Summer🌞</div>
+      <div class="season">Fall🍂</div>
+      <div class="season">Winter❄️</div>
     </div>
 
     <div class="head">Four Season</div>
+
+    <div class="abcd">
+    <div class="a">Blooming season</div>
+    <div class="b">Hello, sunshine</div>
+    <div class="c">Falling for Autumn.</div>
+    <div class="d">Warm winter wishes.</div>
+    </div>
 
     <div class="back">
       <img
@@ -78,6 +102,7 @@
         alt=""
       />
     </div>
+  </div>
   </body>
 </html>
 
