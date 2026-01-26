@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 브라우저에 저장하는 법
+      // localstorage란?
+      // 1) 브라우저 키-값(key-value)형태로 데이터를 저장
+      // 2) 브라우저를 닫아도 (종료해도) 유지됨
+      // 3) 값은 문자열(string)만 저장 : 객체저장시 문자열로 변환, 읽을때도 문자열 -> 객체 변환 필요
+      // 4) 도메인별로 저장됨( www.naver.com)
+      //    http://www.naver.com:8080/date/text.html
+      //    http:// 프로토콜
+      //    www.naver.com 도메인
+      //    :8080 포트
+      //    /date/text.html 경로
+      localStorage.setItem("username", "steve12"); // 저장
+      const name = localStorage.getItem("username"); // 읽기
+      console.log(name);
+      localStorage.removeItem("username"); //삭제
+      localStorage.clear(); // 전체 삭제
+
+      // [중요!!!!]  객체의 저장
+      const user = {
+        name: "steve",
+        age: 25,
+        job: "developer",
+      };
+      localStorage.setItem("user", JSON.stringify(user)); // 객체의 문자열 변환 후 저장
+      const data = JSON.parse(localStorage.getItem("user")); // 문자열을 객체로 전환
+      console.log(data);
+
+      // 세션스토리지
+      sessionStorage.setItem("user", JSON.stringify(user));
+      const dataSession = JSON.parse(sessionStorage.getItem("user")); // 문자열 변환 후 저장
+    </script>
+  </body>
+</html>

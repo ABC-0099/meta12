@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.3/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 비동기 코드
+      // 자바스크립트 비동기 문법 : async ~ await
+      // await가 붙은 라인의 코드 실행을 응답이 올때까지 멈추는 역할
+      // await는 혼자 사용이 불가능하고 아래 규칙을 따라야 함
+      // 1) 반드시 함수안에서 사용
+      // 2) 함수의 선언시 async를 사용
+      async function getPosts() {
+        // try ~ catch
+        // 비동기 API요청은 기본적으로 네트워크를 사용하므로 실패의 가능성이 존재함
+        // 개발자는 항상 성공과 실패의 경우로 나눠서 설계할 필요가 있음
+        /****************************************************************************************
+         
+           실제 서버로 부터 응답되는 상태코드(status)별 처리 방법
+           try : 200, 201, 204
+           catch : 400(잘못된 요청), 401(인증오류), 403(권한 오류), 500(서버오류)
+          
+         *******************************************************************************************/
+        try {
+          const response = await axios.get(
+            "https://jsonplaceholder.typicode.com/posts",
+          );
+          console.log(response.data);
+          console.log("첫번째 글 제목 : " + response.data[0].title);
+        } catch (error) {
+          console.error(error); // 실패했을때의 로그
+        }
+      }
+      // 함수 호출
+      getPosts();
+    </script>
+  </body>
+</html>
