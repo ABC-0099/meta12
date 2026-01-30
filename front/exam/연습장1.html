@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(68, 69, 114);
+        padding: 0 50px;
+        color: white;
+      }
+
+      li {
+        list-style: none;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      nav a {
+        display: flex;
+        color: white;
+      }
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 100px;
+      }
+      section {
+        background-color: white;
+      }
+
+      div {
+        background-color: blue;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+      }
+      aside {
+        background-color: rgb(141, 141, 141);
+        padding: 20px 10px;
+      }
+      footer {
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: rgb(51, 51, 51);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>MyClass</h1>
+
+      <nav>
+        <ul>
+          <li><a href="#">홈</a></li>
+          <li><a href="#">강의 소개</a></li>
+          <li><a href="#">게시판</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>오늘의 학습주제 : 레이아웃</h2>
+        <p>HTML 구조를 잡고 CSS flexbox를 이용해 배치하는 방법을 배웁니다.</p>
+        <div>컨텐츠 영역</div>
+      </section>
+
+      <aside>
+        <h3>공지사항</h3>
+        <ul>
+          <li><a href="#">과제 제풀 기한 안내</a></li>
+          <li><a href="#">준비물; 노트북, 열정</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 MyClass. All right reserved</p>
+    </footer>
+  </body>
+</html>
