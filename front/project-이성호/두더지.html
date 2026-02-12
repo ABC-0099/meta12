@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>두더지 잡기</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      .score {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .hole {
+        width: 100px;
+        height: 100px;
+        background: #654321;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .mole {
+        width: 60px;
+        height: 60px;
+        background: brown;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        display: none;
+      }
+
+      .hole.active .mole {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐹 두더지 잡기</h1>
+    <div class="score">점수: <span id="score">0</span></div>
+
+    <div class="board">
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+      <div class="hole"><div class="mole"></div></div>
+    </div>
+
+    <script>
+      const holes = document.querySelectorAll(".hole");
+      const scoreEl = document.getElementById("score");
+      let score = 0;
+      let currentHole = null;
+
+      function showMole() {
+        if (currentHole) {
+          currentHole.classList.remove("active");
+        }
+
+        const randomIndex = Math.floor(Math.random() * holes.length);
+        currentHole = holes[randomIndex];
+        currentHole.classList.add("active");
+
+        setTimeout(() => {
+          currentHole.classList.remove("active");
+        }, 700);
+      }
+
+      holes.forEach((hole) => {
+        hole.addEventListener("click", () => {
+          if (hole === currentHole && hole.classList.contains("active")) {
+            score++;
+            scoreEl.textContent = score;
+            hole.classList.remove("active");
+          }
+        });
+      });
+
+      setInterval(showMole, 1000);
+    </script>
+  </body>
+</html>
