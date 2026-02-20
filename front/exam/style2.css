@@ -1,0 +1,59 @@
+body {
+  background-color: #f4f4f4;
+  font-family: "Malgun Gothic", sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 15px;
+}
+
+nav li > a {
+  color: #fff;
+  text-decoration: none;
+}
+main {
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px 0px 0px 0px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  grid-template-columns: 30% 70%;
+  /* 그리드 범위 조절 */
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
+}
+.box {
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+}
+.topbox {
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  background-color: #e6e4d9;
+}
+
+footer {
+  color: #333;
+}

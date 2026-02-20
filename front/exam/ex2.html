@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style2.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>안녕하세요, 홍길동입니다</h1>
+      <nav>
+        <ul>
+          <li><a href="#">자기소개</a></li>
+          <li><a href="#">보유기술</a></li>
+          <li><a href="#">연락처</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <hr />
+    <main>
+      <h3>자기소개</h3>
+      <div style="margin-bottom: 15px">
+        저는 현재 직업훈련교과서 웹 개발 과정을 수강하고 있습니다.
+      </div>
+      <div>멋진 개발자가 되기 위해 매일 HTML과 CSS를 공부합니다.</div>
+      <h3>학습 중인 기술</h3>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVA</li>
+      </ul>
+      <h3>연락처 정보</h3>
+      <div class="grid">
+        <div class="topbox">항목</div>
+        <div class="topbox">내용</div>
+        <!-- -->
+        <div class="box">이메일</div>
+        <div class="box">naver@naver</div>
+        <div class="box">전화번호</div>
+        <div class="box">010-0000-0000</div>
+      </div>
+    </main>
+
+    <hr />
+
+    <footer>
+      <p>© 2026 홍길동. All rights reserved.</p>
+    </footer>
+    <script>
+      function join() {
+        let f = document.form;
+        //  값 체크
+        if (f.user_id.value == "") {
+          alert("아이디를 입력하세요.");
+          f.user_id.focus();
+          return;
+        }
+        if (f.password.value == "") {
+          alert("비번를 입력하세요.");
+          f.password.focus();
+          return;
+        }
+        //  한번 더 확인
+        // if (confirm("전송할까요?")) {
+        //   f.submit();
+        // }
+
+        // 전송
+        f.submit();
+      }
+    </script>
+  </body>
+</html>

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
@@ -18,59 +19,61 @@
     </header>
 
     <hr />
+    <main>
+      <h2>회원가입 (교육생 등록)</h2>
 
-    <h2>회원가입 (교육생 등록)</h2>
+      <form name="form" method="post" action="test.html">
+        <fieldset>
+          <legend>개인 정보</legend>
 
-    <form name="form" method="post" action="test.html">
-      <fieldset>
-        <legend>개인 정보</legend>
+          <p>
+            <label for="user_id">아이디: </label>
+            <input type="text" name="user_id" id="user_id" />
+          </p>
 
-        <p>
-          <label for="user_id">아이디: </label>
-          <input type="text" name="user_id" id="user_id" />
-        </p>
+          <p>
+            <label for="password">비밀번호: </label>
+            <input type="password" name="password" id="password" />
+          </p>
 
-        <p>
-          <label for="password">비밀번호: </label>
-          <input type="password" name="password" id="password" />
-        </p>
+          <p>
+            <label>관심 분야: </label>
+            <input type="checkbox" name="interest" value="frontend" />
+            프론트엔드
+            <input type="checkbox" name="interest" value="backend" checked />
+            백엔드
+          </p>
 
-        <p>
-          <label>관심 분야: </label>
-          <input type="checkbox" name="interest" value="frontend" /> 프론트엔드
-          <input type="checkbox" name="interest" value="backend" checked />
-          백엔드
-        </p>
+          <p>
+            <label>성별: </label>
+            <input type="radio" name="gender" value="M" /> 남성
+            <input type="radio" name="gender" value="F" checked /> 여성
+          </p>
 
-        <p>
-          <label>성별: </label>
-          <input type="radio" name="gender" value="M" /> 남성
-          <input type="radio" name="gender" value="F" checked /> 여성
-        </p>
+          <p>
+            <label for="edu">희망 교육과정: </label>
+            <select name="edu" id="edu">
+              <option value="java">자바 스프링 과정</option>
+              <option value="uiux">UI/UX 디자인 과정</option>
+              <option value="bigdata">빅데이터 분석 과정</option>
+            </select>
+          </p>
 
-        <p>
-          <label for="edu">희망 교육과정: </label>
-          <select name="edu" id="edu">
-            <option value="java">자바 스프링 과정</option>
-            <option value="uiux">UI/UX 디자인 과정</option>
-            <option value="bigdata">빅데이터 분석 과정</option>
-          </select>
-        </p>
-
-        <p>
-          <button type="submit">가입하기(submit)</button>
-          <button type="button" onclick="join()">가입하기(button)</button>
-          <button type="button">취소</button>
-        </p>
-      </fieldset>
-    </form>
-
-    <p>© 2026 홍길동. All rights reserved.</p>
-
+          <p>
+            <button type="submit">가입하기(submit)</button>
+            <button type="button" onclick="join()">가입하기(button)</button>
+            <button type="button">취소</button>
+          </p>
+        </fieldset>
+      </form>
+    </main>
+    <footer>
+      <p>© 2026 홍길동. All rights reserved.</p>
+    </footer>
     <script>
       function join() {
         let f = document.form;
-
+        //  값 체크
         if (f.user_id.value == "") {
           alert("아이디를 입력하세요.");
           f.user_id.focus();
@@ -81,7 +84,12 @@
           f.password.focus();
           return;
         }
+        //  한번 더 확인
+        // if (confirm("전송할까요?")) {
+        //   f.submit();
+        // }
 
+        // 전송
         f.submit();
       }
     </script>
