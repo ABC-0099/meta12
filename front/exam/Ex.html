@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>260213 금</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #dddddd;
+      }
+      .head {
+        background-color: #333;
+        padding-bottom: 30px;
+        margin-bottom: 15px;
+      }
+      h2 {
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+      }
+      .mini {
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: 14px;
+      }
+      .main {
+        background-color: white;
+        border-radius: 10px;
+        line-height: 2;
+        padding-left: 25px;
+        margin-bottom: 15px;
+      }
+      .middel {
+        font-size: 24px;
+      }
+      .per {
+        padding-right: 20px;
+        padding-bottom: 20px;
+      }
+      .bottom {
+        padding-bottom: 20px;
+      }
+      legend {
+        padding-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="head">
+      <h2>안녕하세요, 홍길동입니다</h2>
+      <div class="mini">
+        <div class="mi">자기소개</div>
+        <div class="mi">보유기술</div>
+        <div class="mi">연락처</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="mid">
+        <h3 class="middel">회원가입(교육생등록)</h3>
+      </div>
+
+      <div class="per">
+        <!-- 액션은 넘어갈 페이지 -->
+        <form name="name" method="get" action="test.html">
+          <fieldset>
+            <legend>개인정보</legend>
+            <div>아이디: <input type="text" /></div>
+            <div>비밀번호: <input type="password" /></div>
+            <div>
+              관심분야: <input type="checkbox" />프론트엔드<input
+                type="checkbox"
+              />백엔드
+            </div>
+            <div>
+              성별: <input type="radio" name="gender" value="yes" />남
+              <input type="radio" name="gender" value="no" />여
+            </div>
+            <div>
+              희망 교육과정:
+              <select id="javascript" name="javascript">
+                <option value="java">자바스크립트 과정</option>
+                <option value="java">자바스크립트</option>
+                <option value="java">자바</option>
+              </select>
+            </div>
+            <div class="bottom">
+              <input type="submit" value="가입하기" />
+              <input type="reset" value="취소" />
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>2025 홍길동.All</div>
+    </div>
+    <!-- <script>
+      function join(){
+        if(document)
+      }
+    </script> -->
+  </body>
+</html>
