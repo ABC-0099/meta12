@@ -69,11 +69,20 @@
 
     <script>
       function join() {
-        if (document.form.user_id.value == "") {
+        let f = document.form;
+
+        if (f.user_id.value == "") {
           alert("아이디를 입력하세요.");
-          document.form.user_id.focus();
+          f.user_id.focus();
           return;
         }
+        if (f.password.value == "") {
+          alert("비번를 입력하세요.");
+          f.password.focus();
+          return;
+        }
+
+        f.submit();
       }
     </script>
   </body>
