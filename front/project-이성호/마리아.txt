@@ -1,0 +1,220 @@
+DB 생성 test01
+user 생성 test01
+비번 1234
+접속할 주소 localhost
+권한
+
+mariadb -u root -p
+1234
+use mysql;
+
+create database test01;
+show databases;
+
+create user 'test01'@'localhost' identified by
+'1234';
+
+grant all privileges on test01.* to
+test01@localhost;
+
+flush privileges;
+
+select * from db;
+select host,db,user from db;
+
+select * from user;
+select host, user, password from user;
+
+-----------------------------
+
+create table employees(
+id int not null auto_increment primary key,
+name varchar(50) not null,
+department varchar(50) not null,
+role varchar(50) not null,
+salary int not null
+);
+
+insert into employees(name,department,role,salary)
+values('김철수','영업부','사원',3000),
+('이영희','영업부','대리',4000),
+('박민수','개발부','사원',3500),
+('최지윤','개발부','팀장',6000),
+('정수호','개발부','사원',3500);
+
+
+* group by ~ having = ~별(로)
+
+select
+from
+where
+group by
+having
+order by ;
+
+줄 = 레코드(record) = 튜플(tuple) = 행(row)
+열(칸) = 필드(field) = 컬럼(coumn) = 속성(attribute)
+
+
+* 집계 함수
+count(*), count(필드명) : 레코드 개수 
+max(필드명)
+min(필드명)
+sum(필드명)
+avg(필드명)
+
+select count(*) from employees;
+select max(salary) from employees;
+select min(salary) from employees;
+select sum(salary) from employees;
+select avg(salary) from employees;
+
+1. 부서별 직원 수 구하기
+select department, count(*)
+from employees
+group by department;
+
+2. 부서별 급여 합계와 평균 구하기
+select department,
+sum(salary),avg(salary)
+from employees
+group by department;
+
+3. 부서별 급여 합계와 평균 구하고, 평균이 4000이상인 것만 출력
+select department,
+sum(salary),avg(salary)
+from employees
+group by department
+having avg(salary) >= 4000;
+
+4. 부서별, 직급별 직원 수 구하기
+select department,role, count(*)
+from employees
+group by department, role;
+
+-- 부서별 사원 수
+select department_id, count(*)
+from employees
+group by department_id;
+
+
+* 서브 쿼리문에 들어가 있는것 / 조인
+select employee_id,name,department_id
+from employees;
+
+select employee_id,name,department_id
+(
+    select department_name 
+    from departments d
+    where d.department_id = e.department_id
+) as department_name
+from employees e;
+
+select employee_id, name,
+(
+    select base_salary
+    from salaries s
+    where s.employee_id = e.employee_id
+)as salary
+from employees e
+order by salary desc
+limit 1;
+;
+
+-- 사원 이름, 기본급, 보너스 조회
+select employee_id, name,
+(
+    select base_salary
+    from salaries s
+    where s.employee_id = e.employee_id
+)as salary,
+(
+select bonus
+from salaries s
+where s.employee_id = e.employee_id
+) bonus
+from employees e;
+
+--가장 늦게 입사한 사원의 사원번호 이름 입사일 출력
+
+select employee_id,name, hire_date
+from employees
+where hire_date = (select max(hire_date) from employees);
+
+create table orders(
+    order_id int auto_increment primary key,
+    user_name varchar(50),
+    category  varchar(50),
+    product_name varchar(50),
+    price int,ㄴ디
+    quantity int,
+    order_date DATE
+);
+
+insert into orders (user_name,category,product_name,price,quantity,order_date)
+values('김철수', '의류', '무지 티셔츠', 15000, 2, '2024-03-01'),
+('이영희', '전자기기', '무선 마우스', 25000, 1, '2024-03-01'),
+('박민수', '의류', '청바지', 40000, 1, '2024-03-01'),
+('최지윤', '식품', '유기농 사과', 20000, 3, '2024-03-02'),
+('김철수', '전자기기', '키보드', 12000, 1, '2024-03-02'),
+('정수호', '식품', '닭가슴살', 35000, 2, '2024-03-02'),
+('이영희', '의류', '무지 티셔츠', 15000, 1, '2024-03-03'),
+('박민수', '식품', '유기농 사과', 20000, 1, '2024-03-03');
+
+-- 카테고리별 주문 건수 구하기
+select category, count(*) 
+from orders
+group by category;
+
+select category 카테고리, count(*) 주문건수
+from orders
+group by category;
+
+
+-- 카테고리별 총 매출액과 평균 단가 구하기
+select category, sum(price*quantity) 총매출액, avg(price) 평균단가
+from orders
+group by category;
+
+-- 총 매출액이 100,000원 이상인 카테고리만 출력
+select category, sum(price*quantity) 총매출액
+from orders
+group by category
+having sum(price*quantity) >= 100000;
+
+--주문일자별로 카테고리별로 일일매출액 출력
+select order_date 주문일자,category 카테고리, sum(price*quantity) 일일매출액
+from orders
+group by order_date,category;
+
+
+
+
+*  조인
+inner join(내부조인) : 두 테이블에서 일치하는 값이 있는 행만 가져옴.
+                    테이블명1 inner join 테이블명2 on 테이블명1.필드명 = 테이블명2.필드명
+
+                    
+select
+from emp inner join emp2 on emp.dept_id = emp2.dept_id
+where
+group by
+having
+order by
+
+select
+from 테이블명 inner join 테이블명 on 조인할 조건;
+조인할 조건 = 양쪽에 같은 값
+
+EX) select employees e inner join departments d
+on e.department_id = department_id;
+
+select employee_id, name, phone, e.department_id, department_name, location
+from employees e inner join departments d on e.department_id = d.department_id;
+
+
+
+
+
+-[left/right] join(외부 조인)
+
