@@ -213,7 +213,7 @@ select employee_id, name, phone, e.department_id, department_name, location
 from employees e inner join departments d on e.department_id = d.department_id;
 
 
-
-
-
 -[left/right] join(외부 조인)
+
+
+카디시안곱(cartision product)
