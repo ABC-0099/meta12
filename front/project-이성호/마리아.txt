@@ -194,7 +194,7 @@ group by order_date,category;
 inner join(내부조인) : 두 테이블에서 일치하는 값이 있는 행만 가져옴.
                     테이블명1 inner join 테이블명2 on 테이블명1.필드명 = 테이블명2.필드명
 
-                    
+
 select
 from emp inner join emp2 on emp.dept_id = emp2.dept_id
 where
@@ -217,4 +217,3 @@ from employees e inner join departments d on e.department_id = d.department_id;
 
 
 -[left/right] join(외부 조인)
-
