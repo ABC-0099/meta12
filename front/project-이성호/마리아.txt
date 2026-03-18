@@ -212,8 +212,507 @@ on e.department_id = department_id;
 select employee_id, name, phone, e.department_id, department_name, location
 from employees e inner join departments d on e.department_id = d.department_id;
 
-
+outer join
 -[left/right] join(외부 조인)
+-  테이블명1 left outer join 테이블명2 on 테이블명1.필드명 = 테이블명2.필드명
+왼쪽 테이블의 모든 데이터를 가져오고, 오른쪽에 매칭되는 정보가 없으면 NULL로 표시
+
+- 테이블명1 right outer join 테이블명2 on 테이블명2.필드명 = 테이블명1.필드명
+
 
 
 카디시안곱(cartision product)
+
+select e.employee_id, e.name, e.phone, d.department_name, p.position_name
+from employees e inner join departments d on e.department_id = d.department_id
+                 inner join positions p on e.position_id = p.position_id;
+
+
+select name, base_salary, bonus
+from employees e inner join salaries s on e.employee_id = s.employee_id
+where base_salary >= 5000000;
+where base_salary between 3000000 and 5000000; 
+
+select name, base_salary
+from employees e inner join salaries s on e.employee_id = s.employee_id
+where base_salary = (
+    SELECT MAX(base_salary) FROM salaries
+);
+
+where base_salary >= (select avg(base_salary) from salaries);
+
+select name, base_salary, bonus
+from employees e inner join salaries s on e.employee_id = s.employee_id
+where bonus >= (select avg(bonus) from salaries);
+
+
+select name, base_salary, bonus, (base_salary + bonus) * 12 total
+from employees e inner join salaries s on e.employee_id = s.employee_id
+where bonus >= (select avg(bonus) from salaries);
+
+select position_name, avg(s.base_salary)
+from positions p inner join employees e on p.position_id = e.position_id
+                 inner join salaries s on e.employee_id = s.employee_id
+group by position_name
+order by position_id
+
+
+
+select employee_id, date, status
+from attendance
+where date >= '2024-07-01' and date <= '2024-07-31';
+
+select employee_id, date, status,(
+    select name
+    from employees e
+    where e.employee_id = a.employee_id
+) employee_name
+from attendance a
+where date between '2024-07-01' and '2024-07-31' and status = '정상출근';
+
+
+
+select name, position_name, department_name
+from positions p inner join employees e on p.position_id = e.position_id
+                 inner join departments d on d.department_id = e.department_id
+where p.position_id >= 3;
+
+
+select name,date,status
+from attendance a inner join employees e on a.employee_id = e.employee_id
+                  inner join positions p on p.position_id = e.position_id
+where a.status != '휴가';
+
+select employee_id
+from attendance
+where date between '2024-07-01' and '2024-07-31'
+group by  employee_id
+having sum(status = '휴가') = 0;
+
+
+
+새로 만들기
+mariadb -u root -p
+use mysql;
+create database mylibrary;
+create user 'mylibrary'@'localhost' identified by '1234';
+grant all privileges on mylibrary.*to mylibrary@localhost;
+flush privileges;
+
+create table books(
+    id int auto_increment primary key,
+    title varchar(100) not null,
+    author varchar(50),
+    price int,
+    published_date date
+);
+
+
+insert into books(title, author, price, published_date)
+values('어린왕자', '생텍쥐페리', 12000, '1943-04-06');
+
+insert into books(title, author, price, published_date)
+values('데이터베이스 입문', '김철수', 25000, '2023-01-15');
+
+insert into books(title, author, price, published_date)
+values('SQL의 정석', '박영희', 30000, '2024-02-10');
+
+insert into books(title, author, price, published_date)
+values('마리아DB 가이드', '이민호', 22000, '2025-11-20');
+
+20000원 이상 찾ㅈ기
+select price
+from books
+where price >= 20000;
+
+-검색어로 찾기( 제목에 'SQL'이 포함된 책)
+* wild card -> like 연사자 사용
+% : all
+_ : 글자 1자
+
+select *
+from books
+where title like '%SQL%';
+
+가격 순 정렬
+select *
+ from books
+ order by price desc;
+
+ 정보 수정 (특정 도서 가격 인상) : 어린왕자 -> 15000
+ update books set price = 15000 where id = 1;
+
+ - 데이터 삭제(오래된 책 삭제) : 2000-01-01
+ delete from books where published_date < '2000-01-01'
+
+ - 저자가 '이민호'인 도서의 제목과 가격만 출력
+ select title, price from books where author = '이민호';
+
+
+ * 집계 함수 (통계 내기)  == 그룹함수
+count(*), count(필드명) : 레코드 개수 
+max(필드명)
+min(필드명)
+sum(필드명)
+avg(필드명)
+
+카디널리티(cardinalrity) : 레코드 갯수
+디그리(degree) : 필드의 갯수
+
+- 전체 도서 권수 확인하기
+select count(*) as title_books from books;
+
+-도서 평균 가격 계산하기
+select avg(price) from books;
+
+-가장 비싼 책의 가격 찾기
+select max(price),title from books;  --error 판단
+
+select title,price
+from books
+where price = (select max(price) from books);
+
+-그룹화 및 정밀 필터링 (group by & having)
+-저자별 도서 수와 평균 가격 구하기
+select  author, count(*), avg(price)
+from books
+group by author;
+
+
+select
+from
+where
+group by
+having
+order by
+
+- 저자별 평균 도서 가격이 25000 원 이상인 저자만 출력
+select author,avg(price)
+from books
+group by author
+having avg(price) >= 25000;
+
+- 다중 조건 및 범위
+-2023년에서 2024년 사이에 출판된 도서 찾기
+select *
+from books
+where published_date > '2023-01-01' and published_date < '2024-12-31';
+
+select *
+from books
+where published_date like '2023%' or published_date like'2024%';
+
+select *
+from books
+where year(published_date) in (2023,2024);
+
+- 가격이 20000 이하 30000 이상 도서 찾기
+select *
+from books
+where price >= 30000 or price <= 20000;
+
+-제목 옆에 저자명을 붙여서 출력하기 (concat)
+select title,author,concat(title, author) from books;
+
+select concat(title, ' ( ', author, ')' ) from books;
+
+- 출판 연도만 따로 추출하기(year)
+
+
+
+
+* 학과 테이블 : department
+CREATE TABLE department (
+    department_id INT NOT NULL AUTO_INCREMENT,
+    department_name VARCHAR(100) NOT NULL,
+    office_location VARCHAR(100) NOT NULL,
+    PRIMARY KEY (department_id)
+);
+
+insert into department (department_name,office_location) values
+('컴퓨터공학과', '1호관 201호'),
+('전자공학과', '2호관 102호'),
+('경영학과', '3호관 301호'),
+('수학과', '4호관 105호'),
+('심리학과', '5호관 203호');
+
+* 학생 테이블 : student
+create table student (
+    student_id int not null auto_increment primary key,
+    name varchar(100) not null,
+    birth_date date not null,
+    gender char(1) not null,
+    email varchar(100) not null,
+    enrollment_year int not null,
+    department_id int not null,
+    foreign key(department_id) references department(department_id)
+);
+
+insert into student (name,birth_date,gender,email,enrollment_year,department_id) values
+('홍길동', '2000-01-01','M', 'gildong@univ.edu', 2019, 1),
+('김민지', '2001-05-23','F', 'mj,kim@univ.edu', 2020, 2),
+('이준호', '2000-09-12','M', 'jh.lee@univ.edu', 2019, 1),
+('박서연', '1999-11-02', 'F', 'sy.park@univ.edu', 2018, 3),
+('최재훈', '2001-03-17', 'M', 'jh.choi@univ.edu', 2020, 4),
+('정다은', '2002-02-28', 'F', 'de.jung@univ.edu', 2021, 5),
+('한승우', '2000-07-09', 'M', 'sw.han@univ.edu', 2019, 1),
+('윤지훈', '2001-12-12', 'M', 'jh.yoon@univ.edu', 2020, 2),
+('장서연', '1999-10-30', 'F', 'sy.jang@univ.edu', 2018, 3),
+('백예린', '2002-06-06', 'F', 'yr.baek@univ.edu', 2021, 5),
+('이서준', '2000-08-20', 'M', 'sj.lee@univ.edu', 2019, 1),
+('김하늘', '2001-02-10', 'F', 'hn.kim@univ.edu', 2020, 4),
+('서지민', '2000-04-05', 'F', 'jm.seo@univ.edu', 2019, 3),
+('오태양', '2002-09-25', 'M', 'ty.oh@univ.edu', 2021, 2),
+('노윤서', '2001-11-14', 'F', 'ys.no@univ.edu', 2020, 5),
+('조민호', '1999-01-18', 'M', 'mh.jo@univ.edu', 2018, 1),
+('백승현', '2000-03-09', 'M', 'sh.baek@univ.edu', 2019, 4),
+('이하린', '2002-12-01', 'F', 'hr.lee@univ.edu', 2021, 5),
+('강서준', '2001-05-11', 'M', 'sj.kang@univ.edu', 2020, 3),
+('윤다인', '1999-07-15', 'F', 'di.yoon@univ.edu', 2018, 2);
+
+* 교수(professor)
+create table professor(
+professor_id INT AUTO_INCREMENT primary key,
+name VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+hire_date DATE NOT NULL,
+department_id INT NOT NULL,
+foreign key(department_id) references department(department_id)
+);
+
+INSERT INTO professor (name, email, hire_date, department_id) VALUES
+('김철수', 'cs.kim@univ.edu', '2015-03-01', 1),
+('이영희', 'yh.lee@univ.edu', '2010-09-01', 2),
+('박지훈', 'jh.park@univ.edu', '2012-03-01', 1),
+('정민수', 'ms.jung@univ.edu', '2018-03-01', 3),
+('최윤아', 'ya.choi@univ.edu', '2016-03-01', 4),
+('한지원', 'jw.han@univ.edu', '2014-03-01', 5),
+('유재석', 'js.yoo@univ.edu', '2019-09-01', 3),
+('강호동', 'hd.kang@univ.edu', '2020-03-01', 2),
+('장윤정', 'yj.jang@univ.edu', '2013-03-01', 5),
+('신동엽', 'dy.shin@univ.edu', '2011-09-01', 4);
+
+* 과목(course)
+create table course (
+course_id int AUTO_INCREMENT primary key,
+course_name VARCHAR(100) NOT NULL,
+credits int NOT NULL,
+department_id INT NOT NULL,
+foreign key(department_id) references department(department_id),
+prerequisite_course_id int,
+foreign key(prerequisite_course_id) references course(course_id)
+);
+
+INSERT INTO course (course_name, credits, department_id, prerequisite_course_id) VALUES
+('자료구조', 3, 1, NULL),
+('알고리즘', 3, 1, 1),
+('전자회로', 3, 2, NULL),
+('경영학개론', 2, 3, NULL),
+('미적분학', 3, 4, NULL),
+('심리학개론', 2, 5, NULL),
+('데이터베이스', 3, 1, 1),
+('마케팅원론', 3, 3, NULL),
+('통계학', 3, 4, 5),
+('사회심리학', 3, 5, 6);
+
+* 강의(class)
+CREATE TABLE class (
+    class_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    professor_id INT NOT NULL,
+    semester VARCHAR(20) NOT NULL,
+    classroom VARCHAR(50),
+    schedule VARCHAR(100),
+    capacity INT,
+    FOREIGN KEY (course_id) REFERENCES Course(course_id),
+    FOREIGN KEY (professor_id) REFERENCES Professor(professor_id)
+);
+
+INSERT INTO class (course_id, professor_id, semester, classroom, schedule, capacity) VALUES
+(1, 1, '2024-1', '101호', '월/수 10:00-11:15', 40),
+(2, 3, '2024-2', '102호', '화/목 09:00-10:15', 35),
+(3, 2, '2024-1', '201호', '월/수 11:30-12:45', 45),
+(4, 4, '2024-2', '301호', '화/목 13:00-14:15', 50),
+(5, 5, '2024-1', '401호', '수/금 09:00-10:15', 30),
+(6, 6, '2024-2', '501호', '월/수 14:00-15:15', 25),
+(7, 1, '2024-2', '103호', '화/목 10:30-11:45', 40),
+(8, 7, '2024-1', '302호', '월/수 13:00-14:15', 45),
+(9, 10, '2024-2', '402호', '화/목 09:00-10:15', 30),
+(10, 9, '2024-2', '502호', '금요일 10:00-12:30', 20),
+(1, 3, '2025-1', '104호', '월/수 10:00-11:15', 40),
+(6, 6, '2025-1', '503호', '월/수 15:30-16:45', 25);
+
+* 수강신청(enrollment)
+CREATE TABLE enrollment (
+    enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    class_id INT NOT NULL,
+    enroll_date DATE,
+    status VARCHAR(20),
+    UNIQUE(student_id, class_id),
+    FOREIGN KEY (student_id) REFERENCES Student(student_id),
+    FOREIGN KEY (class_id) REFERENCES Class(class_id)
+);
+
+INSERT INTO enrollment (student_id, class_id, enroll_date, status) VALUES
+(1, 1, '2024-03-01', '수강중'),
+(1, 3, '2024-03-01', '수강중'),
+(2, 1, '2024-03-01', '수강중'),
+(3, 2, '2024-08-20', '수강예정'),
+(4, 4, '2024-09-01', '수강중'),
+(5, 5, '2024-03-01', '수강중'),
+(6, 6, '2024-09-01', '수강예정'),
+(7, 7, '2024-08-20', '수강예정'),
+(8, 1, '2024-03-01', '수강중'),
+(9, 2, '2024-08-20', '수강예정'),
+(10, 8, '2024-03-01', '수강중'),
+(11, 9, '2024-08-25', '수강예정'),
+(12, 10, '2024-09-01', '수강예정'),
+(13, 6, '2024-09-01', '수강예정');
+
+
+-- 성적 테이블
+CREATE TABLE grade (
+    grade_id INT PRIMARY KEY AUTO_INCREMENT,
+    enrollment_id INT NOT NULL,
+    grade VARCHAR(2),
+    grade_point FLOAT,
+    FOREIGN KEY (enrollment_id) REFERENCES Enrollment(enrollment_id)
+);
+
+01. 모든 학과의 이름과 사무실 위치를 조회
+select * from department;
+
+02.2021년도에 입학한 학생들의 이름과 이메일
+select name,email,enrollment_year
+from student
+where enrollment_year = 2021;
+
+03.학점이 3점인 과목중 '공학'이 들어가는 과목명을 조회
+select course_name
+from course
+where credits = 3 and course_name like '%구조%';
+
+4.각 학과별로 소속된 학생이 몇 명인지 구ㅎ
+select department_id,count(*)
+from student
+group by department_id;
+
+5.강의실별 평균 수강 정원(capacity)을 구하고, 평균 정원이 30명 이상인 곳만 출력
+select classroom,capacity
+from class
+group by classroom
+having avg(capacity) >= 30;
+
+6. 학생의 이름과 그 학생이 속한 학과 이름을 함께 조회하세요.
+select name, department_name
+from student s inner join department d on s.department_id = d.department_id;
+
+7. 홍길동 학생이 수강 중인 강의 의 과목명과 담당 교수의 이름을 조회
+select p.name,c.course_name
+from student s inner join enrollment e on s.student_id = e.student_id
+               inner join class cl on e.class_id = cl.class_id
+               inner join course c on cl.course_id = c.course_id
+               inner join professor p on cl.professor_id = p.professor_id
+where s.name = '홍길동';
+
+8. self join 
+과목 테이블에서 각 과목의 이름과 그 과목의 선수과목 이름을 조회
+select c1.course_name, c2.course_name
+from course c1 inner join course c2 on c1.prerequisite_course_id = c2.course_id;
+
+
+
+09 아직 아무도 수강 신청을 하지 않은 강의(class)의 ID 를 조회
+select class_id
+from class
+where class_id not in (select distinct class_id from enrollment);
+
+여학생들의 이름과 이메일을 이름 가나다순 정렬
+select name,email
+from student
+where gender = 'F';
+
+2015년 이전에 임용된 교수의 이름과 임용일 조회
+select name,hire_date
+from professor
+where hire_date <= '2015-01-01';
+
+학점이 3점인 과목의 개수
+select count(*)
+from course
+where credits = 3;
+
+101 201 301호 강의실
+select * from class where classroom in('101호','201호','301호');
+
+이메일 주소가 gmail이 아닌 univ.edu로 끝나는 학생 중복x
+select distinct name
+from student
+where email like '%@univ.edu';
+
+학과별 학생 수를 구하고, 학생 수 가 많은순서 정렬
+select department_id,count(*)
+from student
+group by department_id
+order by count(*) desc;
+
+2024-2학기에 개설된 강의의 총 정원 합계를 구하세요
+select avg(capacity)
+from class
+where semester = '2024-2';
+
+학년도별 입학생 수 를 조회
+select enrollment_year,count(*)
+from student
+group by enrollment_year;
+
+각 교수별 담당 강의 개수
+select professor_id, count(*)
+from professor
+group by professor_id;
+
+선수 과목(prerequisite_course_id)이 지정된 과목들의 평균 학점
+select avg(credits)
+from course
+where prerequisite_course_id IS NOT NULL;
+
+전체 평균 정원보다 정원이 많은 강의의 과목 id와 강의실 조회
+select classroom,course_id
+from class
+where capacity > (
+    select avg(capacity)
+    from class  
+);
+
+자료 구조를 선수 과목으로 가지는 과목의 이름을 조회
+select course_name
+from course
+where prerequisite_course_id = 1;
+where prerequisite_course_id = (select course_id from course_name = '자료구조');
+
+학과 사무실이 1호관에 있는 학과 소속 학생들의 이름을 모두 조회
+select name
+from student
+where department_id in (select department_id from department 
+where office_location like '1호관%');
+
+학과별로 가장 먼저 임용된 교수의 이름과 임용일 조회
+select d.department_name, p.name, p.hire_date
+from professor p inner join department d on p.department_id = d.department_id
+where(p.department_id,p.hire_date) IN(
+    select department_id,min(hire_date) from professor group by department_id
+);
+
+관계 (relationships)의 의미
+데이터 베이스에서 테이블간의 연결고리를 정의한 것입니다
+1:N은 '일대다', N:1은 '다대일'을 의미합니다.
+1:1 일대일
+1:N 일대다
+N:M 다대다
+
+
+select department_name, count(*)
+from departmentd d left outer join  professor p
+on d.department_id = p.department_id
+group by department_name;
