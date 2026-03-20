@@ -716,3 +716,134 @@ select department_name, count(*)
 from departmentd d left outer join  professor p
 on d.department_id = p.department_id
 group by department_name;
+
+create table book_all(
+    id int not null auto_increment primary key,
+    subject varchar(100) not null,
+    author varchar(100) not null,
+    created date not null,
+    profile varchar(100) not null
+);
+
+insert into book_all(subject,author,created,profile) values
+('점프 투 파이썬', '박응용', '2019-07-14','프로그래밍'),
+('점프 투 자바', '박응용', '2018-08-25','프로그래밍'),
+('딥 러닝을 이용한 자연어 처리 입문', 'WJY', '2019-07-12','프로그래밍'),
+('공이의 수학정리노트', 'donghoon', '2019-04-05','수학'),
+('예제로 배우는  DRACLE 11g', '초록우산', '2019-07-12','데이터베이스'),
+('주식 시장을 이기는 마법의 자동매매', '엑슬론', '2019-03-16','주식'),
+('비트코인 개발자 가이드', 'Soori', '2018-02-24','금융'),
+('미국 금융공학 유학', '엑슬론', '2019-07-12','주식'),
+('Deep Inside VBA', '곽승주', '2019-07-12','VBA'),
+('CentOS 만들기', '박응용', '2016-10-19','프로그래밍'),
+('Windows Sever 만들기', '박응용', '2017-08-09','프로그래밍');
+
+select *
+from book_all
+where profile = '프로그래밍';
+
+select * from book_all where id = 5;
+
+select * from book_all
+where created like '2019%';
+where year(created) = '2019';
+where create >='2019-01-01' and created <='2019-12-31';
+where create between '2019-01-01' and '2019-12-31';
+
+select * from book_all where create < '2018-01-01'
+
+select * from book_all where profile = '주식' or profile = '금융';
+select * from book_all where profile in ('주식','금융');
+
+select * from book_all where author !='박응용';
+
+select * from book_all where profile in ('VBA','금융','수학');
+
+select * from book_all limit 5 offset 5;
+offset 5개 건너띰 limit는 5개만 가져옴
+
+distinct 중복 없이
+concat 글자 붙이기
+
+select * from book_all;
+delete from book_all;
+
+
+
+* author
+create table author(
+    author_id int auto_increment,
+    author_name varchar(50),
+    primary key(author_id)
+);
+
+*profile
+create table profile(
+    profile_id int auto_increment primary key,
+    profile_name varchar(50)
+);
+
+insert into author (author_name) values
+('박응용'),
+('WJY'),
+('donghoon'),
+('초록우산'),
+('엑슬론'),
+('Soori'),
+('곽승주');
+
+insert into profile (profile_name) values
+('프로그래밍'),
+('수학'),
+('데이터베이스'),
+('주식'),
+('금융'),
+('VBA');
+
+
+create table books(
+    book_id int primary key auto_increment, 
+    subject varchar(100),
+    created date,
+    author_id int,
+    profile_id int,
+    foreign key (author_id) references author(author_id),
+    foreign key (profile_id) references profile(profile_id)
+);
+
+insert into books (subject,created,author_id ,profile_id) values
+('점프 투 파이썬', '2019-07-14',1,1),
+('점프 투 자바', '2018-08-25',1,1),
+('딥 러닝을 이용한 자연어 처리 입문', '2019-07-12',2,1),
+('공이의 수학정리노트', '2019-04-05',3,2),
+('예제로 배우는  DRACLE 11g', '2019-07-12',4,3),
+('주식 시장을 이기는 마법의 자동매매', '2019-03-16',5,4),
+('비트코인 개발자 가이드', '2018-02-24',6,5),
+('미국 금융공학 유학', '2019-07-12',5,4),
+('Deep Inside VBA', '2019-07-12',7,6),
+('CentOS 만들기', '2016-10-19',1,1),
+('Windows Sever 만들기', '2017-08-09',1,1);
+
+모든 책 제목과 작가의 이름
+select subject,author_name
+from books b inner join author a on b.author_id = a.author_id;
+
+모든 책 제목과 해당 카테고리
+select subject,profile_name
+from books b inner join profile p on b.profile_id = p.profile_id;
+
+박응용 작가가 쓴 책 제목들만 조회
+select subject,author_name
+from books b inner join author a on b.author_id = a.author_id
+where author_name = '박응용';
+
+프로그래밍 카테고리에 속한 책 제목과 작가 이름 조회
+select subject,author_name
+from books b inner join author a on b.author_id = a.author_id
+inner join profile p on b.profile_id = p.profile_id
+where profile_name = '프로그래밍';
+
+2019년에 등록된 책 제목과 작가이름
+select subject,author_name
+from books b inner join author a on b.author_id = a.author_id
+where b.created like '2019%';

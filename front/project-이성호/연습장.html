@@ -1,0 +1,105 @@
+* SQL문 DDL DML : select, insert, update, delete DCL TCL *select 문 select
+필드명, 컬럼명, 칸이름 from 테이블명 where 조건 = group by having order by;
+select * from users; select id, username, name, phone from users; select id,
+username, name, status from users; where status = 'active' * 이메일 주소가
+gmail인 사용자 select * from users where email = '%@gmail.com' * wild card -
+like 연산자 사용. % : 모든 것. _ : 글자 1자. * 이름이 '김' 으로 시작하는 사용자
+select id, name, phone from users where name like '김%'; select id, name, phone
+from users where status = 'inactive' or status = 'banned'; select id, name,
+phone from users where status = 'inactive' or status = 'banned'; *정렬 오름차순
+: asc 내림차순 : desc select * from users order by create_at desc; limit n; >
+정렬하고 n만큼 자름 limit n offset n; " n 만큼 건너뜀 * 활성 사용자 중 최근
+가입한 3명 select * from users where status = 'active' order by created_at desc
+limit 3; *이름에 '우'가 들어간 사용자 3명 조회 (가나다 순) select * from users
+where name like '%우%' order by name asc limit 3; select distinct status 다른거
+from users; *자료형 char() 고정형 varchar() 가변형 int datetime enum('M' , 'F')
+*키 : 무결성 기본키 : 중복 X, null X 대체키 : 후보키였지만 기본키로 선택되지
+않은 키 후보키 : 기본키 될 수 있는 후보 슈퍼키 : 행을 중복 없이 구별할 수 있으면
+모두 슈퍼키가 됩니다 외래키 = 참조키 > 다른 테이블의 기본키 참조. auto_increment
+> 자동증가 PK > primary key * 사원관리 DB 모델링 (설계) 1. 사원정보 테이블 2.
+부서정보 테이블 departments 3. 직급정보 테이블 positions 4. 급여정보 테이블 5.
+근태정보 " 6. 입사, 퇴사이력저장 테이블 NN > not null * 부서정보 테이블 :
+departments 일련번호(departments_id) 숫자 NN 자동증가 PK
+부서이름(departments_name) 문자열(250) NN 지역(location) 문자열(255) create
+table departments ( departments_id int not null auto_increment primary key,
+departments_name varchar(250) not null, location varchar(255) ); 인사팀, 서울
+개발팀, 부산 재무팀, 서울 마케팅팀, 대전 영업팀, 광주 INSERT INTO departments
+(departments_name, location) VALUES ('인사팀', '서울'), ('개발팀', '부산'),
+('재무팀', '서울'), ('마케팅팀', '대전'), ('영업팀', '광주'); * 직급정보 테이블
+일련번호(position_id) 숫자 NN 자동증가 PK 직급명(position_name) 문자열(255) NN
+레벨(level) 숫자 NN create table positions ( position_id int not null
+auto_increment primary key, position_name varchar(255) not null, level int not
+null ); show positions; desc positions; 사원, 1 대리, 2 과장, 3 차장, 4 부장, 5
+*사원정보 테이블 : employees 사원번호(employees_id) 숫자 NN 자동증가 이름(name)
+문자열(100) NN 생년월일(birth_date) 날짜 성별(gender) 이놈 NN 이메일(email)
+문자열(250) NN 전화번호(phone) 문자열(250) 입사일(hire_date) 날짜 NN
+부서(department_id) 숫자 직급(position_id) 숫자 상태(is_active) boolean 기본값
+true 제약조건 PK unique not null default enum create table employees(
+employees_id int not null auto_increment primary key, name varchar(100) not
+null, birth_date date, gender enum('M','F') not null, email varchar(250) not
+null, phone varchar(250), hire_date date not null, department_name varchar(250)
+not null, position_name varchar(250) not null, is_active boolean default true );
+-- department_id int , -- position_id int, desc employees; select * from
+employees; INSERT INTO employees (name, birth_date, gender, email, phone,
+hire_date, department_name,position_name, is_active) VALUES ('김영희',
+'1990-05-21', 'F', 'kimyh@example.com', '010-1234-5678', '2020-03-01','인사팀',
+'사원', TRUE), ('박철수', '1985-11-15', 'M', 'park@example.com',
+'010-2345-6789', '2018-07-15','개발팀', '과장', TRUE), ('이수민', '1992-02-10',
+'F', 'leesm@example.com', '010-0123-4567', '2021-01-10','재무팀', '대리', TRUE),
+('정하늘', '1988-09-09', 'M', 'jungsky@example.com', '010-1111-2222',
+'2023-01-20','개발팀', '차장', TRUE), ('오미정', '1995-12-12', 'F',
+'ohmj@example.com', '010-3333-4444', '2019-06-01','인사팀', '사원', TRUE),
+('이준호', '1991-07-30', 'M', 'leejh@example.com', '010-5555-6666',
+'2016-02-02','마케팅팀', '과장', TRUE), ('김세연', '1993-03-03', 'F',
+'kimsy@example.com', '010-7777-8888', '2022-03-03','영업팀', '대리', TRUE),
+('박지후', '1987-01-11', 'M', 'parkjh@example.com', '010-9999-0000',
+'2010-05-30','재무팀', '부장', TRUE), ('최지아', '1996-06-06', 'F',
+'choijae@example.com', '010-1234-5678', '2017-05-05','인사팀', '사원', TRUE),
+('한지훈', '1990-10-10', 'M', 'janjh@example.com', '010-9876-5432',
+'2020-05-15','마케팅팀', '대리', TRUE); 모든 사원 조회 select * from employees
+이름 이메일 폰만 select name, email, phone from employees SELECT
+DATE_FORMAT(hire_date, '%Y') AS hire_year_str FROM employees; SELECT
+DATE_FORMAT(hire_date, '%y') AS hire_year_str FROM employees; 입사일이 2020년
+이후인 사원 select * from employees where hire_date >= '2020-01-01'; select *
+from employees where year(hire_date) = 2020; select * from employees where
+hire_date like '2020%'; 남자사원목록 select * from employees where gender = 'M';
+입사일이 2020년도인 남성 사원 목록 select * from employees where year(hire_date)
+= 2020 AND gender = 'M'; select * from employees where hire_date >= '2020-01-01'
+and hire_date <= '2020-12-31' and gender = 'M'; 입사일 빠른 순 정렬 SELECT *
+FROM employees ORDER BY hire_date; update employees set department_name =
+'Devel-op where department_name = '개발팀' or department *급여 정보 테이블
+create table salaries( employee_id int not null primary key, base_salary int not
+null, bonus int not null, effective_date varchar(250) not null ); INSERT INTO
+salaries(employee_id, base_salary, bonus, effective_date) VALUES(1, 3000000,
+200000,'2024-01-01'), (2, 4500000, 500000,'2024-01-01'), (3, 3500000,
+300000,'2024-01-01'), (4, 5000000, 550000,'2024-01-01'), (5, 2800000,
+100000,'2024-01-01'), (6, 4200000, 250000,'2024-01-01'), (7, 3100000,
+180000,'2024-01-01'), (8, 6000000, 700000,'2024-01-01'), (9, 2900000,
+120000,'2024-01-01'), (10, 3300000, 220000,'2024-01-01'); 근태 기록 테이블
+CREATE TABLE attendance ( attendance_id INT AUTO_INCREMENT PRIMARY KEY,
+employee_id INT, date DATE NOT NULL, check_in_time TIME, check_out_time TIME,
+status ENUM('정상출근', '지각', '결근', '휴가') DEFAULT '정상출근', FOREIGN KEY
+(employee_id) REFERENCES employees(employees_id) ); INSERT INTO
+attendance(attendance_id, employee_id, date, check_in_time, check_out_time,
+status) VALUES (1,1,'2024-07-10','09:01:00','18:00:00','정상출근'),
+(2,2,'2024-07-10','09:01:00','18:00:00','정상출근'),
+(3,3,'2024-07-10','09:30:00','18:00:00','지각'),
+(4,4,'2024-07-10',NULL,NULL,'휴가'),
+(5,5,'2024-07-10','09:05:00','18:10:00','정상출근'),
+(6,6,'2024-07-10',NULL,NULL,'결근'),
+(7,7,'2024-07-10','08:58:00','18:00:00','정상출근'),
+(8,8,'2024-07-10','09:15:00','18:05:00','지각'),
+(9,9,'2024-07-10',NULL,NULL,'휴가'),
+(10,10,'2024-07-10','09:01:00','18:03:00','정상출근'); CREATE TABLE
+employment_history ( history_id INT AUTO_INCREMENT PRIMARY KEY, employee_id INT,
+action ENUM('입사', '퇴사') NOT NULL, action_date DATE NOT NULL, note TEXT,
+FOREIGN KEY (employee_id) REFERENCES employees(employees_id) ); select * from
+employment_history;] 김씨 성을 가진 개발팀, 인사팀 소속 select name,
+departmnet_id FROM employees WHERE (department_id = 1) or (department_id = 20 or
+(department_id = 3) 집계 함수 = 그룹 함수 count(*) : 전체 레코드 갯수 구할 때
+사용 count (필드명) 해당 필드에서 null을 제외한 레코드 수 max (필드명) min
+(필드명) sum (필드명) avg (필드명) select count(*) from employees; select max
+(employees) from employees; group by 특정 컬림 기준으로 그룹화 having 그룹에
+조건을 줄떄 사용 개발팀 인사팀 소속 사원 부서별 사원 수 select distinct
+depatment_id from employees; 직급별로 사원 수를 출력하세요 select position_id as
+직급 ,count(*) 사원수 from employees group by position_id; having order by

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #f0f2f5;
+        padding-top: 50px;
+      }
+
+      .card-container {
+        width: 320px;
+        background-color: white;
+        margin: 0 auto;
+        /* auto - 좌우마진을 부모의 크기 내에서 최대로 가질 수 있도록 함, 자연스럽게 정렬 */
+        border-radius: 16px;
+        box-shadow: 0 4px rgba(0, 0, 0, 1);
+        padding-bottom: 30px; /* 내용이 카드의 가장 아래에 붙으면 보기 안좋기 때문에 padding bottom */
+        overflow: hidden; /*카드 내용물이 카드 영역을 벗어나면 보이지 않게 함 */
+        text-align: center;
+      }
+      .info-box {
+        padding: 20px;
+      }
+      .name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px;
+      }
+      .bio {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .btn-contact {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #333;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.3s;
+      }
+      .btn-contact:hover {
+        background-color: #111;
+      }
+      .author {
+        font-size: 13px;
+        color: gray;
+        padding-bottom: 15px;
+      }
+      .id{
+        text-align: left;
+        padding-left: 55px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="info-box">
+        <h1 class="name">로그인</h1>
+
+        <p class="bio">
+          <form action="">
+            <div>
+                <div class="id"><label for="user-id">사용자 ID</label></div>
+                <input type="txet" id="user-id" name="username">
+            </div>
+            <div>
+                <div class="id"><lable for="user-password">사용자 PW</lable></div>
+                <input type="password" id="user-password" name="password">
+            </div>
+        </form>
+        </p>
+      </div>
+      <div class="author">
+        회원가입
+      </div>
+      <a href="" class="btn-contact"> 로그인 </a>
+    </div>
+  </body>
+</html>
