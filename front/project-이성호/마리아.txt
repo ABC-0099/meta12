@@ -847,3 +847,24 @@ where profile_name = '프로그래밍';
 select subject,author_name
 from books b inner join author a on b.author_id = a.author_id
 where b.created like '2019%';
+
+create table student (
+    hakbun int not null auto_increment primary key,
+    name varchar(50) not null,
+    ssn varchar(15) not null UNIQUE,
+    phone varchar(15) not null,
+    address varchar(250) not null,
+    createdDate datetime default current_timestamp
+);
+
+
+
+
+
+
+
+
+
+
+
+
