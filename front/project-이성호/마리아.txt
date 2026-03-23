@@ -863,29 +863,230 @@ create table student (
 
 
 
-
-
-
-
-
 *VIEW
 create table departments(
     dept_id INT primary key,
     dept_name varchar(50)
-)
+);
 
 create table employees(
     emp_id INT primary key,
     name varchar(100),
     salary INT,
     dept_id INT,
-    foreign key (dept_id) REFERENCES department(dept_id)
-)
+    foreign key (dept_id) REFERENCES departments(dept_id)
+);
 
-INSERT INTO departments VALUES (1, '인사팀),(2, '개발팀),(3, '디자인팀);
+INSERT INTO departments VALUES (1, '인사팀'),(2, '개발팀'),(3, '디자인팀');
 
 INSERT INTO employees VALUES
 (101,'김철수', 500, 1),
 (102,'이영희', 600, 2),
 (103,'박민수', 550, 2),
-(104,'최지우', 450, 3),
+(104,'최지우', 450, 3);
+
+
+
+create view v_emp_dept
+as
+    select e.emp_id,e.name,d.dept_name
+    from employees e inner join departments d on e.dept_id = d.dept_id;
+
+*
+*
+뷰 : 가상의 테이블
+select * from v_emp_dept;
+create view v_dept_avg_salary
+as
+    ??? 
+마리아DB에서 * VIEW(뷰)*는 하나 이상의 테이블을 기반으로 만든 가상 테이블
+실제 데이터르르 저장 X ,복잡한 쿼리를 미리 저장하고 테이블 처럼 사용ㄱㄴ
+*
+*
+
+select d.dept_name, avg(e.salary) as 평균급여
+from employees e inner join departments d on e.dept_id = d.dept_id
+group by d.dept_name;
+
+create view v_dept_avg_salary
+as
+    select d.dept_name, avg(e.salary) as 평균급여
+    from employees e inner join departments d on e.dept_id = d.dept_id
+    group by d.dept_name;
+
+select * from v_dept_avg_salary where dept_name = '개발팀';
+
+drop view v_dept_avg_salary;
+
+
+create or replace view v_dept_avg_salary
+as
+    select d.dept_name, avg(e.salary)
+    from employees e inner join departments d on e.dept_id = d.dept_id
+    group by d.dept_name;
+
+create or replace view v_dept_avg_salary
+as
+    select d.dept_name, avg(e.salary) as avg_salary
+    from employees e inner join departments d on e.dept_id = d.dept_id
+    group by d.dept_name;
+
+*
+replace = 없음 만들고 있음 덮어쓰기
+select할때 사용
+*
+
+create view active users as
+select * from users where status = 'active'
+with check option;
+
+*
+index
+목차처럼 특정 데이터 빠르게 찾기
+장점
+select 속도 향상
+단점
+insert,update,delete 자주 사용 속도저하
+*
+create table employees(   
+    emp_id INT primary key,
+    emp_name varchar(100),
+    dept_id INT,
+    email varchar(100),
+    salary DECIMAL(10,2),
+    hire_date DATE
+);
+
+insert into employees
+(emp_id,emp_name,dept_id,email,salary,hire_date)values
+(1,'Alice kim',10,'alice@company.com', 55000,' 2020-01-15'),
+(2,'Bob Lee',20,'bob@company.com', 62000,' 2019-03-22'),
+(3,'Charlie park',10,'charlie@company.com', 58000,' 2021-05-10'),
+(4,'Diana choi',30,'diana@company.com', 60000,' 2018-07-01'),
+(5,'Evan Jung',20,'evan@company.com', 54000,' 2022-02-25');
+
+인덱스 확인
+show index from employees;
+
+인덱스 생성
+create index idx_dept_id on employees(dept_id);
+
+복합 인덱스 생성 (두 개 이상의 컬럼)
+create index idx_dept_salary on employees(dept_id,salary);
+
+유니크 인덱스 생성
+create UNIQUE INDEX idx_email_unique on employees(email);
+
+툴첵스트 인덱스 생성
+alter table employees add fullext idx_name_fulltext(emp_namep);
+
+create index idx_dept_id on employees(dept_id);
+
+문장 종결자'를 바꾸는 명령어
+DELIMITER //
+
+create procedure insert_employee(
+    IN p_id Int,
+    IN p_name varchar(50),
+    IN P_salary DECIMAL(10,2),
+    IN p_dept_id INT
+)
+begin
+    insert into employees (emp_id,emp_name,salary,dept_id)
+    values(p_id,P_name,p_salary,p_dept_id);
+END //
+
+DELIMITER;
+
+CALL insert_employee(6,'김유진',58000,20);
+
+SHOW PROCEDURE STATUS WHERE Db = 'javaDB';
+
+drop procedure get_bonus;
+dorp procedure if exists get_bonus;
+
+
+DELIMITER//
+
+CREATE PROCEDURE count_loop()
+BEGIN
+DECLARE counter INT DEFAULT 1;
+WHILE counter <= 50 DO
+SELECT CONCAT('현재 숫자 : ', counter);
+SET counter = counter +1;
+END WHILE;
+END //
+
+DELIMITER;
+
+call count_loop();
+
+===============================================================================================
+*프로시저의 기본 구조 (복습)
+DELIMITER // -- 1. "지금부터는 //가 나올 때까지 기다려!" (구분자 변경)
+
+CREATE PROCEDURE 이름() -- 2. "이런 이름의 버튼을 만들게"
+BEGIN -- 3. "여기서부터 시작"
+    -- 실행할 SQL 내용들 (INSERT, UPDATE, WHILE 등)
+END // -- 4. "여기까지가 끝이야!" (아까 바꾼 구분자 사용)
+
+DELIMITER ; -- 5. "다시 원래대로 세미콜론(;)을 쓸게"
+
+CALL 이름();
+*
+===============================================================================================
+문장 뜯어보기
+
+BEGIN 다음 DECLARE
+DECLARE counter INT DEFAULT 1;
+DECLARE (디클레어): * "이제부터 변수를 하나 선언
+counter (카운터): * 변수의 이름
+INT (인티저): *데이터 타입(형태)
+DEFAULT 1 (디폴트 1): * 초깃값
+
+WHILE counter <= 50 DO
+WHILE (와일): * "~하는 동안에"라는 뜻입니다. 뒤에 나오는 조건이 **참(True)**인 동안에는 절대 멈추지 말고 계속 돌아가라는 신호입니다.
+
+counter <= 50 (조건식): * 현재 counter라는 바구니에 든 숫자가 50 이하인지 검사합니다.
+
+만약 51이 되는 순간? 이 조건은 **거짓(False)**이 되어 반복문을 즉시 탈출하게 됩니다.
+
+DO (두): * "자, 조건이 맞으니까 이제 아래 일들을 실행해(Do)!"라는 뜻입니다.
+
+===============================================================================================
+SELECT CONCAT('현재 숫자 : ', counter);
+SELECT (셀렉트): 화면에 보여줌
+CONCAT (콘캣): 'Concatenate'의 약자로, 여러 개의 문자열이나 변수를 하나로 합쳐주는 집선기 같은 함수입니다.
+
+괄호 안에 쉼표(,)로 구분해서 넣으면 순서대로 이어 붙여줍니다.
+
+'현재 숫자 : ' (문자열):
+
+작은따옴표(')로 감싸진 부분은 있는 그대로 출력되는 고정된 글자입니다.
+
+counter (변수):
+
+아까 DECLARE로 만든 변수입니다. 루프가 돌 때마다 1, 2, 3...으로 변하는 실제 숫자가 이 자리에 들어갑니다.
+===============================================================================================
+SET counter = counter +1;
+SET (셋):
+"값을 설정하겠다!" 또는 "바구니의 내용물을 바꾸겠다!"라고 선언하는 명령어입니다.
+ DECLARE가 바구니를 처음에 만드는 것이라면, SET은 그 안에 든 것을 교체하는 것입니다.
+
+counter = (왼쪽):
+이건 "수학적으로 같다"는 뜻이 아니라, 
+**"오른쪽 계산 결과를 이 바구니에 다시 집어넣어라"**라는 대입(Assignment)의 의미입니다.
+
+counter + 1 (오른쪽):
+현재 바구니에 들어있는 값(예: 1)에 1을 더합니다.
+결과값은 2가 되고, 이 2가 다시 왼쪽의 counter 바구니로 쏙 들어갑니다.
+===============================================================================================
+END WHILE; 
+반복문 끝
+
+END //   (프로시저의 끝)
+
+DELIMITER;  (원래대로 복구)
+
+call count_loop();  (명령 실행)
+===============================================================================================
