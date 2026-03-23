@@ -868,3 +868,24 @@ create table student (
 
 
 
+*VIEW
+create table departments(
+    dept_id INT primary key,
+    dept_name varchar(50)
+)
+
+create table employees(
+    emp_id INT primary key,
+    name varchar(100),
+    salary INT,
+    dept_id INT,
+    foreign key (dept_id) REFERENCES department(dept_id)
+)
+
+INSERT INTO departments VALUES (1, '인사팀),(2, '개발팀),(3, '디자인팀);
+
+INSERT INTO employees VALUES
+(101,'김철수', 500, 1),
+(102,'이영희', 600, 2),
+(103,'박민수', 550, 2),
+(104,'최지우', 450, 3),
