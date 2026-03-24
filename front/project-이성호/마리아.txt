@@ -1090,3 +1090,237 @@ DELIMITER;  (원래대로 복구)
 
 call count_loop();  (명령 실행)
 ===============================================================================================
+
+DELIMITER //
+
+CREATE FUNCTION square_num(n INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+RETURN n * n;
+END//
+
+DELIMITER ;
+----
+DELIMITER //
+
+CREATE FUNCTION calcuate_tax(salary DECIMAL(10,2))
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+RETURN salary * 0.1;
+END//
+DELIMITER ;
+
+SELECT emp_name, salary, calcuate_tax(salary) AS calcuate_tax
+FROM employees;
+SELECT emp_name, salary, (salary * 0.1 ) as tax
+FROM employees;
+
+show FUNCTION status where db = 'javaDB';
+
+drop function calcuate_tax;
+drop function square_num;
+
+DELIMITER //
+
+create function format_phone(phone varchar(11))
+RETURNS varchar(13)
+DETERMINISTIC
+BEGIN
+RETURN CONCAT(SUBSTRING(phone, 1, 3), '-', SUBSTRING(phone,4,4),'-', SUBSTRING(phone,8,4));
+END //
+
+DELIMITER ;
+
+drop table employees;
+
+create table employees(
+    emp_id int primary key,
+    emp_name varchar(50),
+    salary decimal(10,2)
+);
+
+insert into employees values
+(1, '홍길동', 50000),
+(2, '김영희', 62000),
+(3, '이철수', 72000);
+
+
+
+DELIMITER //
+
+create or replace procedure process_tax()
+begin
+-- 변수 선언
+DECLARE done INT default false;
+DECLARE v_name varchar(50);
+DECLARE v_salary decimal(10,2);
+DECLARE v_tax DECIMAL(10,2);
+
+-- 커서 선언 : 직원 이름과 급여 조회
+DECLARE emp_cursor cursor for
+select emp_name, salary from employees;
+
+-- 더이상 데이터가 없을때 done = true 설정
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+OPEN emp_cursor;
+
+read_loop:LOOP
+FETCH emp_cursor INTO v_name, v_salary;
+
+-- 데이터가 없음 루프 종료
+IF done THEN
+LEAVE read_loop;
+END IF;
+
+-- 급여가 NULL 인 경우 세금 0 처리
+IF v_salary IS NULL THEN
+set v_tax = 0;
+ELSE
+set v_tax = v_salary * 0.1;
+END IF;
+
+-- 세금 정보 출력
+select concat(v_name, '의 세금은 ', v_tax, ' 원 입니다.') AS tax_info;
+END LOOP read_loop;
+
+close emp_cursor;
+END //
+
+DELIMITER ;
+
+====================================
+Trigger
+트리거는 테이블에 insert, update, delete 작업이 발생할떄 자동으로 실행되는 sql블록입니다
+개발자가 명시적으로 호출하지 않아도 자동 실행됩니다.
+
+목적
+데이터 무결성 유지, 자동 감사 로깅 , 복잡한 로직 자동화 , 보안 강화
+설명
+특저어 조건에 따라 데이터 자동 검증/변환
+변경 전/후 정보 저장
+====================================
+
+drop table employees;
+
+create table employees(
+    emp_id int primary key,
+    emp_name varchar(50),
+    salary decimal(10,2)
+);
+
+create table emp_log(
+    log_id INT auto_increment primary key,
+    emp_id INT,
+    action_type varchar(10),
+    log_time datetime
+);
+
+
+DELIMITER //
+
+create trigger trg_after_insert_emp
+after insert
+on emplotees
+for each row
+begin
+insert into emp_log (emp_id, action_type, log_time)
+values(new.emp_id 'INSERT', now());
+end //
+
+DELIMITER ;
+
+insert into employees values (1, '김지훈', 55000);
+select * from employees;
+insert into employees values (2, '이성순', 66000);
+
+-===================================================
+select distinct author_name
+from author a inner join books b 
+on a.author_id = b.author_id
+inner join profile p on b.profile_id = p.profile_id
+where profile_name ='주식';
+
+select a.author_name,b.subject ,b.created 
+from books b inner join author a on b.author_id = a.author_id
+where subject like '%파이썬%';
+
+select distinct p.profile_name
+from author a inner join books b on a.author_id = b.author_id
+inner join profile p on b.profile_id = p.profile_id
+where author_name = '엑슬론';
+
+select a.author_name, b.subject
+from author a inner join books b on a.author_id = b.author_id
+inner join profile p on b.profile_id = p.profile_id
+ORDER BY created DESC LIMIT 1;
+
+select author_name,profile_name
+from author a inner join books b on a.author_id =  b.author_id
+inner join profile p on b.profile_id = p.profile_id
+where author_name = 'WJY';
+
+select a.author_name,count(b.author_id)
+from author a inner join books b on a.author_id = b.author_id
+group by author_name;
+
+SELECT p.profile_name, COUNT(b.book_id) AS book_count
+FROM profile p 
+INNER JOIN books b ON p.profile_id = b.profile_id
+GROUP BY p.profile_name; -- SELECT에 있는 컬럼을 모두 그룹화
+
+SELECT author_name,COUNT(b.book_id)
+FROM profile p
+INNER JOIN books b ON p.profile_id = b.profile_id
+inner join author a on a.author_id = b.author_id
+GROUP BY a.author_id
+having COUNT(b.book_id) >= 2;
+
+
+select year(created),count(book_id)
+from books
+group by year(created);
+
+SELECT LEFT(created, 4) AS pub_year, COUNT(*) AS book_count
+FROM books
+GROUP BY LEFT(created, 4);
+
+select author_name,created
+from author a inner join books b on a.author_id = b.author_id
+group by author_name
+order by created desc;
+
+select profile_name
+from profile p inner join books b on p.profile_id = b.profile_id
+where book_id IS NULL;
+
+select p.profile_name
+from profile p 
+where not exists(
+    select 1
+    from books b
+    where b.profile_id = p.profile_id
+);
+ select count(profile_name)
+    from profile p inner join books b on p.profile_id = b.profile_id
+    group by profile_name
+     order by count(profile_name) desc;
+
+SELECT subject
+FROM books
+WHERE author_id IN (
+    SELECT author_id 
+    FROM books 
+    WHERE subject LIKE '%을%'
+);
+
+select a.author_name,subject
+from author a inner join books b on a.author_id = b. author_id
+where subject like '%점프%';
+
+select author_name,subject,created
+from author a inner join books b on a. author_id = b.author_id
+where year(created) >= '2019'
+order by created asc;
