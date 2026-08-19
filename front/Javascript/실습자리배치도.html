@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    table, td{
+        border: 1px solid #ccc;
+        border-collapse:  collapse;
+    }
+    td{
+        padding: 10px;
+        font-size: 0.9em;
+    }
+</style>
+<body>
+    <script>
+        let memNum = parseInt(prompt('입장객은 몇 명인가요?'));
+        let colNum = parseInt(prompt('한 줄에 몇 명씩 앉습니까?'));
+
+        if(memNum % colNum === 0){
+            rowNum = memNum / colNum;
+        }
+        else{
+            rowNum = parseInt(memNum/colNum) + 1;
+        }
+        document.write('<table>')
+        for(let i = 0; i < rowNum; i++){
+            document.write('<tr>');
+            for(let j = 1; j <= colNum; j++){
+                seatNo = i * colNum + j;
+                if(seatNo > memNum) break;
+                document.write(`<td>좌석${seatNo}</td>`);
+            }
+            document.write(`<tr>`);
+        }
+        document.write('</tables>')
+    </script>
+</body>
+</html>

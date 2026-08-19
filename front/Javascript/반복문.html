@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/timestables.css">
+</head>
+<style>
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .times{
+        padding: 0 30px 40px 30px;
+        margin: 15px;
+        border: 1px solid #ccc;
+        line-height: 2;
+    }
+    .times h3{
+        text-align: center;
+        font-weight: bold;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- 반복문이 없다면! -->
+    <!-- <script>
+        let sum = 0;
+
+        sum += 1;
+        sum += 2;
+        sum += 3;
+        sum += 4;
+        sum += 5;
+
+        document.write(`1에서5까지 더한값은 ${sum}`);
+    </script> -->
+
+    <!-- for문 -->
+    <!-- <script>
+        let sum = 0;
+        for(let i = 0; i<1001 ; i++){
+            sum += i;
+        }
+        document.write(`더한값은 <strong>${sum}</strong>`);
+    </script> -->
+    <!-- 중첩 for문 -->
+     <h1>구구단</h1>
+     <div class = "container">
+      <script>
+        for(let i = 2; i <=9; i++){
+            document.write(`<div class=times>`);
+            document.write(`<h3>${i}단</h3>`);
+            for(let j = 1; j <= 9; j++){
+                document.write(`${i} * ${j} = ${i * j}<br>`);
+            }
+            document.write(`</div>`)
+        }
+     </script>  
+     </div>
+</body>
+</html>

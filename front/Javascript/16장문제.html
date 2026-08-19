@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 16장 1번 문제 -->
+    <!-- <h3>4의 배수일까 아닐까</h3>
+    <script>
+        let num = parseInt(prompt('숫자를 입력하세요'));
+        if(num % 4 === 0){
+            document.write(`${num}은 4의 배수입니다.`);
+        }else{
+            document.write(`${num}은 4의 배수가 아닙니다.`);
+        }
+    </script> -->
+
+
+    <!-- 16장 2번 문제 -->
+     <h2> 3의 배수 찾기 </h2>
+     <script>
+        let num = parseInt(prompt("몇 까지3의 배수를 찾을까요?"));
+        let count = 0;
+        
+        for(let i = 1; i <= num; i++){
+            if(i % 3 === 0){
+                document.write(`${i}, `);
+                count++;
+            }
+        }
+        document.write(`<br><br>${num}까지 3의 배수의 개수:${count} `);
+     </script>
+</body>
+</html>
